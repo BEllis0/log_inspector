@@ -2,17 +2,28 @@ const axios = require('axios');
 
 module.exports = {
     user: {
-        get: (req, res) => {
+        get: {
+            allUsers: (req, res)  => {
 
+            },
+            byId: (req, res) => {
+
+            },
         },
-        post: (req, res) => {
+        post: {
+            new: (req, res) => {
 
+            },
         },
-        update: (req,  res) => {
+        update: {
+            byId: (req, res) => {
 
+            },
         },
-        delete: (req, res) => {
+        delete: {
+            byId: (req, res) => {
 
+            },
         },
     },
 };
