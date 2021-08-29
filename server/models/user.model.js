@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const ObjectId = Schema.ObjectId;
 const { isEmail } = require('validator');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const SALT_WORK_FACTOR = 10;
 
 // Schema for user model
