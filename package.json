@@ -1,0 +1,10 @@
+{
+  "name": "logger_server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/BEllis0/logger_server.git",
+    "type": "git"
+  }
+}
