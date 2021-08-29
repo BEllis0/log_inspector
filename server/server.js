@@ -3,6 +3,10 @@ const morgan = require('morgan');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
+// ==== routes
+const messageRouter = require('./routes/messages.js');
+
+
 // ==== db connection
 // const { connection } = require('./database/connection.js');
 
@@ -17,6 +21,10 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
+
+const apiV = '1';
+
+app.use(`/api/v${apiV}/messages`, messageRouter);
 
 // ==== listen
 app.listen(PORT, () => {
