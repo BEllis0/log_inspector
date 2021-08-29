@@ -1,5 +1,6 @@
 {
   "name": "logger_server",
+  "author": "Brandon Ellis",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -16,7 +17,19 @@
     "mongoose": "^6.0.2"
   },
   "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-google": "^0.14.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.12"
+  },
+  "engines": {
+    "node": "16.6.2",
+    "npm": "7.20.3"
+  },
+  "scripts": {
+    "start:dev": "nodemon server/server.js -w server -w database/config.js",
+    "start": "node server/server.js",
+    "build": "npm install",
+    "lint": "eslint ./"
   }
 }
