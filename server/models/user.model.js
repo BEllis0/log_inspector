@@ -25,16 +25,17 @@ const UserSchema = new Schema({
         required: true,
         minlength: 8,
     },
-    group: {
+    group: { // for enterprise level
         type: String,
         required: false,
     },
-    permissions: Array,
+    permissions: Array, // for enterprise level
     company: {
         type: String,
         required: false,
     },
-    company_id: ObjectId
+    companyId: ObjectId, // for enterprise level
+    domains: Array // used for whitelisting domains that can send messages
 }, {
     timestamps: true,
 });
