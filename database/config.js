@@ -8,10 +8,9 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
 const uri = process.env.ATLAS_URI;
-/*
+
 const connection = mongoose.connect(uri)
     .then(() => console.log("MongoDB database connection established successfully"))
     .catch(err => console.log(err));
 
 module.exports.connection = connection;
-*/
