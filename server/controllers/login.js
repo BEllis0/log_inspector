@@ -9,48 +9,52 @@ module.exports = {
         .then(user => {
             //check if email address exists
             if(!user) {
-                console.log('User not found')
-                return res.status(400).json({emailnotfound: "Email not found"});
-            } else { 
-                //compare passwords
-                bcrypt.compare(req.body.password, user[0].password)
-                .then(isMatch => {
-                    if(isMatch) {
-                        
-                        const payload = {
-                            id: user.id,
-                            name: user.username
-                        };
-
-                        jwt.sign(
-                            payload,
-                            process.env.secretOrKey,
-                            {
-                                algorithm: 'HS256',
-                                expiresIn: 31556926 // 1 year in seconds
-                            },
-                            (err, token) => {
-                                console.log(`User ${user[0].username} successfully logged in`);
-                                res.status(200).json({
-                                    success: true,
-                                    message: "Successfully logged in",
-                                    token: token,
-                                });
-                            }
-                        );
-                    }
-                    else {
-                        console.log('Password Incorrect');
-                        return res
-                        .status(400)
-                        .json({ passwordincorrect: "Password incorrect" });
-                    }
-                })
-                .catch(err => {
-                    console.log('Error logging in: ', err);
-                    res.status(400).json("Error" + err)
-                });
+                console.log('Login: User not found')
+                return res.status(400).json({ message: "Email not found" });
             }
+
+            //compare passwords
+            bcrypt.compare(req.body.password, user[0].password)
+            .then(isMatch => {
+                if(isMatch) {
+                    
+                    const payload = {
+                        id: user.id,
+                        name: user.username
+                    };
+
+                    jwt.sign(
+                        payload,
+                        process.env.JWT_KEY,
+                        {
+                            algorithm: 'HS256',
+                            expiresIn: 31556926 // 1 year in seconds
+                        },
+                        (err, token) => {
+                            if (err) {
+                                console.log('Error generating JWT in login.')
+                                res.status(500).json({message: "Error logging in."});
+                            }
+                            console.log(`User ${user[0].username} successfully logged in`);
+                            res.status(200).json({
+                                success: true,
+                                message: "Successfully logged in",
+                                token: token,
+                            });
+                        }
+                    );
+                }
+                else {
+                    console.log('Password Incorrect');
+                    return res
+                    .status(400)
+                    .json({ message: "Password incorrect" });
+                }
+            })
+            .catch(err => {
+                console.log('Error logging in: ', err);
+                res.status(400).json("Error" + err)
+            });
         })
         .catch(err => {
             console.log('Error logging in: ', err);
