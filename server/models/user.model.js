@@ -29,13 +29,19 @@ const UserSchema = new Schema({
         type: String,
         required: false,
     },
+    clientApiKey: {
+        type: String,
+        require: true,
+        unique: true
+    },
+    token: String,
     permissions: Array, // for enterprise level
     company: {
         type: String,
         required: false,
     },
     companyId: ObjectId, // for enterprise level
-    domains: Array // used for whitelisting domains that can send messages
+    domains: Array,// used for whitelisting domains that can send messages
 }, {
     timestamps: true,
 });
