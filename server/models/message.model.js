@@ -5,6 +5,7 @@ const ObjectId = Schema.ObjectId;
 const messageSchema = new Schema({
     siteName: String,
     environment: String,
+    channel: String,
     domain: String, // parsed from the api request. Used for CORs security. Only allow whitelisted domains in the users' domain list
     page: String,  // either received in req body or parsed from req headers
     message: {

@@ -10,6 +10,7 @@ module.exports = {
                         const messagePayload = {
                             siteName: req.body.siteName || null,
                             environment: req.body.environment || null,
+                            channel: req.body.channel || null,
                             domain: req.hostname,
                             ownerId: validatedPerson.personId || undefined, // returned from validation process
                             page: req.protocol + "://" + req.hostname + req.originalUrl || null,
@@ -38,9 +39,18 @@ module.exports = {
         },
         get: {
             byUser: (req, res) => {
-                // get messages from db
+                const { user } = req;
+
+                Message.find({ ownerId: user.user_id })
+                    .then(messages => {
+                        res.status(200).json(messages);
+                    })
+                    .catch(err => {
+                        console.log('Error getting messages from logged in user: ', err);
+                        res.status(400).json({message: "Error getting messages."});
+                    });
             },
-            
+
         },
     },
 };
