@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const messageRouter = require('./routes/messages.js');
 const userRouter = require('./routes/users.js');
 const loginRouter = require('./routes/login.js');
+const refreshRouter = require('./routes/refresh.js');
 
 // ==== db connection
 const { connection } = require('../database/config.js');
@@ -30,6 +31,7 @@ const apiV = '1';
 app.use(`/api/v${apiV}/messages`, messageRouter);
 app.use(`/api/v${apiV}/users`, userRouter);
 app.use(`/api/v${apiV}/login`, loginRouter);
+app.use(`/api/v${apiV}/refresh`, refreshRouter)
 
 // ==== listen
 app.listen(PORT, () => {
