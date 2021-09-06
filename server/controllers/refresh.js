@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 module.exports = {
     post: {
         refresh: (req, res) => {
+            console.log(req)
             // look for httpOnly refresh cookie
             if (req.cookies) {
                 const newToken = jwt.sign(
