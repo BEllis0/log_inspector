@@ -52,6 +52,7 @@ module.exports = {
                         success: true,
                         message: "Successfully logged in",
                         token: token,
+                        cookie: res.cookie
                     });
                 }
             })
