@@ -5,11 +5,24 @@ const jwt = require('jsonwebtoken');
 module.exports = {
     user: {
         get: {
-            allUsers: (req, res)  => {
-
-            },
             byId: (req, res) => {
+                const { user_id } = req.user;
+                User.findById(user_id)
+                    .then(user => {
+                        const { email, username, group, company, domains } = user;
+                        const payload = {
+                            email,
+                            username,
+                            group,
+                            company,
+                            domains
+                        };
 
+                        res.status(200).json(payload);
+                    })
+                    .catch(err => {
+                        res.status(400).json({message: "User not found", error: err});
+                    });
             },
         },
         post: {
@@ -64,10 +77,10 @@ module.exports = {
                 const { username } = req.body;
                 User.findByIdAndUpdate(user_id, { username })
                     .then(response => {
-                        res.status(200).json({message: "Username successfully updated.", data: username })
+                        res.status(200).json({message: "Username successfully updated.", data: username });
                     })
                     .catch(err => {
-                        console.log('Error updating username', err)
+                        console.log('Error updating username', err);
                         res.status(400).json({message: "Error updating username"});
                     });
             },
@@ -76,10 +89,10 @@ module.exports = {
                 const { password } = req.body;
                 User.findByIdAndUpdate(user_id, { password })
                     .then(response => {
-                        res.status(200).json({message: "Password successfully updated." })
+                        res.status(200).json({message: "Password successfully updated." });
                     })
                     .catch(err => {
-                        console.log('Error updating password', err)
+                        console.log('Error updating password', err);
                         res.status(400).json({message: "Error updating password"});
                     });
             },
@@ -88,10 +101,10 @@ module.exports = {
                 const { email } = req.body;
                 User.findByIdAndUpdate(user_id, { email })
                     .then(response => {
-                        res.status(200).json({message: "Email successfully updated.", data: email })
+                        res.status(200).json({message: "Email successfully updated.", data: email });
                     })
                     .catch(err => {
-                        console.log('Error updating email', err)
+                        console.log('Error updating email', err);
                         res.status(400).json({message: "Error updating email"});
                     });
             },
@@ -104,10 +117,10 @@ module.exports = {
                 const { user_id } = req.user;
                 User.findByIdAndDelete(user_id)
                     .then(response => {
-                        res.status(200).json({message: "User successfully deleted." })
+                        res.status(200).json({message: "User successfully deleted." });
                     })
                     .catch(err => {
-                        console.log('Error deleting user', err)
+                        console.log('Error deleting user', err);
                         res.status(400).json({message: "Error deleting user"});
                     });
             },
