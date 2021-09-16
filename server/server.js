@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 
 // ==== routes
 const messageRouter = require('./routes/messages.js');
@@ -24,7 +25,6 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 
-console.log()
 // ==== API handlers
 
 const apiV = '1';
@@ -32,7 +32,15 @@ const apiV = '1';
 app.use(`/api/v${apiV}/messages`, messageRouter);
 app.use(`/api/v${apiV}/users`, userRouter);
 app.use(`/api/v${apiV}/login`, loginRouter);
-app.use(`/api/v${apiV}/refresh`, refreshRouter)
+app.use(`/api/v${apiV}/refresh`, refreshRouter);
+
+// ==== serve static files
+app.use(express.static(path.join(__dirname, '../client/public')));
+
+// ==== handle page refresh
+app.get(/.*/, (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/public/index.html'));
+});
 
 // ==== listen
 app.listen(PORT, () => {
