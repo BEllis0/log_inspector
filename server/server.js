@@ -24,6 +24,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 
+console.log()
 // ==== API handlers
 
 const apiV = '1';
