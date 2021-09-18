@@ -2,6 +2,7 @@
 export const actions = {
     // check if user is logged in based on finding JWT
     login: {
+        LOGIN: 'LOGIN',
         LOGIN_CHECK: 'LOGIN_CHECK'
     },
     logout: {
@@ -14,6 +15,10 @@ export const actions = {
     //profile information
     profile: {
         FETCH_PROFILE: 'FETCH_PROFILE',
+    },
+    fetchData: {
+        FETCH_DATA_BY_USER: 'FETCH_DATA_BY_USER',
+        FETCH_DATA_BY_COMPANY: 'FETCH_DATA_BY_COMPANY',
     },
     //error handling
     error: {
