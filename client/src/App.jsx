@@ -1,18 +1,25 @@
 import React from 'react';
 import { withRouter, BrowserHistory } from 'react-router';
-
+import { Route } from "react-router-dom";
 // redux
 import { connect } from 'react-redux'; // connect to store
 
 // components
-import { Home } from './components/Views/Home/Home.jsx';
+import Home from './components/Views/Home/Home.jsx';
+import RegisterOrSignIn from './components/Views/RegisterOrSignIn/RegisterOrSignIn.jsx';
 
 class App extends React.Component {
+
+    componentDidMount() {
+        console.log('mounted')
+    }
     
     render() {
         return (
             <div>
-                <Route exact path="/" component={Home} />
+                <Route exact path="/register"  component={RegisterOrSignIn} />
+                <Route exact path="/sign-in"  component={RegisterOrSignIn} />
+                {/* <Route exact path="/" component={Home} /> */}
                 {/* <Route path="/error" component={ErrorPage} /> */}
             </div>
         )
