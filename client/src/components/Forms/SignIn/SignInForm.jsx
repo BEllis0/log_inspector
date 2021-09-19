@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { withRouter } from 'react-router';
 
-import Copyright from '../../lib/copyright.js';
+import Copyright from '../../Misc/Copyright.jsx';
 
 // redux
 import { connect } from 'react-redux'; // connect to store
@@ -16,23 +16,10 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 
-// function Copyright(props) {
-//   return (
-//     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-//       {'Copyright © '}
-//       <Link color="inherit" href="#">
-//         Log Inspector
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
-
 const SignInForm = () => {
 
   return (
-    <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+    <Grid item xs={12} sm={8} md={5} elevation={6} square>
         <Box
         sx={{
             my: 8,
