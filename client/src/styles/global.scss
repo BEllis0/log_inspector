@@ -1,0 +1,83 @@
+@import './variables.scss';
+
+// ===============
+// General page helpers
+// ===============
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.overflow-x-hidden {
+    overflow-x: hidden;
+}
+
+.overflow-y-hidden {
+    overflow-y: hidden;
+}
+
+// ===============
+// Display Helpers
+// ===============
+
+.flex {
+    display: flex;
+}
+
+.flex-justify-center {
+    justify-content: center;
+}
+
+.flex-justify-sa {
+    justify-content: space-around;
+}
+
+.flex-justify-sb {
+    justify-content: space-between;
+}
+
+.flex-align-center {
+    align-items: center;
+}
+
+.flex-direction-row {
+    flex-direction: row;
+}
+
+.flex-direction-rr {
+    flex-direction: row-reverse;
+}
+
+.flex-direction-column {
+    flex-direction: column;
+}
+
+.flex-direction-cc {
+    flex-direction: column-reverse;
+}
+
+// Margins
+
+.contentMargin {
+    margin: 0 50px;
+}
+
+.margin-lr-20 {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+// Navigation Links
+
+.primaryNavLink {
+    margin: 0 20px;
+    padding: 5px;
+    font-size: 20px;
+    text-decoration: none;
+    color: $darkBlue;
+    font-weight: 500;
+}
+
+.primaryNavLink:hover {
+    
+}
