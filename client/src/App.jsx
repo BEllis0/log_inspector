@@ -3,7 +3,7 @@ import { withRouter, BrowserHistory } from 'react-router';
 import { Route } from "react-router-dom";
 // redux
 import { connect } from 'react-redux'; // connect to store
-import styles from './global.scss';
+import styles from './styles/global.scss';
 
 // components
 import Home from './components/Views/Home/Home.jsx';
