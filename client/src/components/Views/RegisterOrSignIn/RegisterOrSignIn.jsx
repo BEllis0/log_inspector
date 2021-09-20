@@ -14,7 +14,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme();
 
 const RegisterOrSignIn = (props) => {
-
     return (
         <ThemeProvider theme={theme}>
 
@@ -50,8 +49,8 @@ const RegisterOrSignIn = (props) => {
       
             </Grid>
         </ThemeProvider>
-  );
-}
+    );
+};
 
 const mapStateToProps = state => ({
     state: state
