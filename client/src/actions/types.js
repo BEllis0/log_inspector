@@ -8,6 +8,9 @@ export const actions = {
     logout: {
         LOGOUT: 'LOGOUT'
     },
+    register: {
+        REGISTER_USER: 'REGISTER_USER'
+    },
     // page change reference for different displays
     pageChange: {
         PAGE_CHANGE: 'PAGE_CHANGE'
