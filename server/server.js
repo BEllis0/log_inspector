@@ -8,6 +8,7 @@ const path = require('path');
 const messageRouter = require('./routes/messages.js');
 const userRouter = require('./routes/users.js');
 const loginRouter = require('./routes/login.js');
+const logoutRouter = require('./routes/logout.js');
 const refreshRouter = require('./routes/refresh.js');
 
 // ==== db connection
@@ -32,6 +33,7 @@ const apiV = '1';
 app.use(`/api/v${apiV}/messages`, messageRouter);
 app.use(`/api/v${apiV}/users`, userRouter);
 app.use(`/api/v${apiV}/login`, loginRouter);
+app.use(`/api/v${apiV}/logout`, logoutRouter);
 app.use(`/api/v${apiV}/refresh`, refreshRouter);
 
 // ==== serve static files

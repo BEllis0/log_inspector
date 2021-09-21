@@ -2,7 +2,7 @@ const router = require('express').Router();
 const usersController = require('../controllers/users.js');
 const auth = require('../util/auth.js');
 
-router.get('/', auth, usersController.user.get.byId);
+router.get('/user', auth, usersController.user.get.byId);
 router.post('/new', usersController.user.post.new);
 router.patch('/update/username', auth, usersController.user.update.username);
 router.patch('/update/password', auth, usersController.user.update.password);
