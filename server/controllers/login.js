@@ -45,6 +45,7 @@ module.exports = {
                     res.cookie("refreshToken", user[0]._id, {
                         secure: process.env.NODE_ENV !== "development",
                         httpOnly: true,
+                        sameSite: true,
                         expires: new Date(Date.now() + (60000 * 24)),
                     });
                         
