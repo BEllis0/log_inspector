@@ -1,13 +1,16 @@
 const axios =  require('axios');
 
+/*
 // Authorization utils for api calls
+*/
 
-export default AuthPost = (url, data) => {
+export const AuthPost = (url, data) => {
     return new Promise((resolve, reject) => {
         axios.post(url, {
             headers: {
-                'x-access-token': '' // where token is saved
+                "content-type": "application/json",
             },
+            withCredentials: true,
             data: data
         })
         .then(response => {
@@ -19,12 +22,13 @@ export default AuthPost = (url, data) => {
     });
 };
 
-export default AuthGet = (url) => {
+export const AuthGet = (url) => {
     return new Promise((resolve, reject) => {
         axios.post(url, {
             headers: {
-                'x-access-token': '' // where token is saved
+                "content-type": "application/json",
             },
+            withCredentials: true,
         })
         .then(response => {
             resolve(response);
@@ -35,12 +39,13 @@ export default AuthGet = (url) => {
     });
 };
 
-export default AuthPatch = (url, data) => {
+export const AuthPatch = (url, data) => {
     return new Promise((resolve, reject) => {
         axios.post(url, {
             headers: {
-                'x-access-token': '' // where token is saved
+                "content-type": "application/json",
             },
+            withCredentials: true,
             data: data
         })
         .then(response => {
@@ -52,12 +57,13 @@ export default AuthPatch = (url, data) => {
     });
 };
 
-export default AuthDelete = (url, data) => {
+export const AuthDelete = (url, data) => {
     return new Promise((resolve, reject) => {
         axios.post(url, {
             headers: {
-                'x-access-token': '' // where token is saved
+                "content-type": "application/json",
             },
+            withCredentials: true,
             data: data
         })
         .then(response => {
