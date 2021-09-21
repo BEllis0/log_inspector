@@ -6,7 +6,7 @@ require('dotenv').config();
 module.exports = {
     login: (req, res) => {
 
-        const { email, username, password } = req.body;
+        const { email, username, password } = req.body.data;
 
         if (!(email && password)) {
             res.status(400).send({ message: "Missing email or password for login." });
