@@ -27,7 +27,7 @@ module.exports = {
         },
         post: {
             new: (req, res) => {
-                const { email, username, password } = req.body.data;
+                const { email, username, password, firstName, lastName } = req.body.data;
                 
                 if (!(email && password && username)) {
                     res.status(400).json({ message: "Missing information for registration." });
@@ -48,6 +48,8 @@ module.exports = {
 
                     const newUser = new User({
                         email,
+                        firstName,
+                        lastName,
                         username,
                         password,
                         clientApiKey: apiKey
