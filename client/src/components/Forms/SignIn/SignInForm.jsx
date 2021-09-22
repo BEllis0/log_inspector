@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { withRouter } from 'react-router';
-import { login } from '../../../actions/login.js';
-
-import Copyright from '../../Misc/Copyright.jsx';
+import { useHistory } from 'react-router-dom';
 
 // redux
 import { connect } from 'react-redux'; // connect to store
+import { login } from '../../../actions/login.js';
+import { getProfile } from '../../../actions/profile.js';
 
+// UI kit components
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -16,7 +17,12 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 
+// components
+import Copyright from '../../Misc/Copyright.jsx';
+
 const SignInForm = props => {
+
+    let history = useHistory();
 
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -26,7 +32,10 @@ const SignInForm = props => {
         props.login({
             email: email,
             password: password
-        });
+        })
+        .then(() => {
+            props.getProfile();
+        })
     };
 
     return (
@@ -102,11 +111,12 @@ const SignInForm = props => {
 }
 
 const mapStateToProps = state => ({
-    user: state
+    
 });
 
 const mapDispatchToProps = {
     login,
+    getProfile
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignInForm));
