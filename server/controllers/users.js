@@ -1,6 +1,8 @@
 const User = require('../models/user.model.js');
+const ValidationCode = require('../models/validationCode.model.js');
 const { generateApiKey } = require('../util/generateApiKey.js');
 const jwt = require('jsonwebtoken');
+const { emailService } = require('../util/nodeMailer.js');
 
 module.exports = {
     user: {
@@ -27,7 +29,7 @@ module.exports = {
         },
         post: {
             new: (req, res) => {
-                const { email, username, password, firstName, lastName } = req.body.data;
+                const { email, username, password, firstName, lastName } = req.body.data || req.body;
                 
                 if (!(email && password && username)) {
                     res.status(400).json({ message: "Missing information for registration." });
@@ -38,12 +40,60 @@ module.exports = {
                 const checkExistingUsername = User.findOne({ username: username });
 
                 Promise.all([checkExistingEmail, checkExistingUsername])
-                .then(user => {
+                .then(async user => {
                     // if user is found
                     if (user[0] || user[1]) {
                       return res.status(400).json({ error: user[0] ? "Email already exists." : "Username already exists." });
                     } 
-                        
+
+                    /* 
+                        Generate an email validation code and save in DB
+                    */
+
+                    const baseUrl = req.protocol + "://" + req.get("host");
+                    const validationKey = generateApiKey().apiKey;
+                
+                    const newCode = new ValidationCode({
+                        code: validationKey,
+                        email: email,
+                    });
+
+                    newCode.save()
+                        .then(() => {
+                            console.log('saving new validation code');
+                        })
+                        .catch(err => {
+                            console.log('error creating new validation code')
+                        })
+
+                    /* 
+                        Email validation
+                        Create email message and send
+                    */
+
+                    const data = {
+                        from: `YOUR NAME <${process.env.EMAIL_USERNAME}>`,
+                        to: email,
+                        subject: "Your Activation Link for Log Inspector",
+                        text: `Please use the following link within the next 10 minutes to activate your account on Log Inspector: ${baseUrl}/api/auth/verification/verify-account/${email}/${validationKey}`,
+                        html: `<p>Please use the following link within the next 10 minutes to activate your account on Log Inspector: <strong><a href="${baseUrl}/api/auth/verification/verify-account/${email}/${validationKey}" target="_blank">Email</a></strong></p>`,
+                    };
+
+                    // IN DEV
+
+                    // emailService.sendMail(data)
+                    //     .then((res) => {
+                    //         console.log('Email sent');
+                    //     })
+                    //     .catch(err => {
+                    //         console.log('Error sending email: ', err)
+                    //     });
+
+
+                    /* 
+                        Create user object and save
+                    */
+
                     const apiKey = generateApiKey().apiKey;
 
                     const newUser = new User({
@@ -68,7 +118,6 @@ module.exports = {
                     newUser.save()
                         .then(() => res.status(201).json({ message: `Successfully created new user ${username}` }))
                         .catch(err => res.status(400).json({ message: "Error saving new user", error: err }));
-                    
                 })
                 .catch(err => res.status(400).json("Error " + err));
             },
