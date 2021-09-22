@@ -42,7 +42,7 @@ module.exports = {
                     );
 
                     // attach refresh token
-                    res.cookie("refreshToken", user[0]._id, {
+                    res.cookie("token", token, {
                         secure: process.env.NODE_ENV !== "development",
                         httpOnly: true,
                         sameSite: true,
@@ -53,7 +53,7 @@ module.exports = {
                         success: true,
                         message: "Successfully logged in",
                         token: token,
-                        cookie: res.cookie
+                        user_id: user[0].id
                     });
                 }
             })
