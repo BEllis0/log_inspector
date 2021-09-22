@@ -27,6 +27,10 @@ const UserSchema = new Schema({
         required: true,
         minlength: 8,
     },
+    status: {
+        type: String,
+        default: 'pending'
+    },
     group: { // for enterprise level
         type: String,
         required: false,
