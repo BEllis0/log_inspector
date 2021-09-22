@@ -2,9 +2,9 @@ import  { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import throttle from 'lodash.throttle';
-import {parse, stringify} from 'flatted';
+// import {parse, stringify} from 'flatted';
 
-const initialState = {};
+// const initialState = {};
 
 const middleware = [thunk];
 
@@ -57,8 +57,8 @@ if (window.__REDUX_DEVTOOLS_EXTENSION__ !== undefined) {
   );
 }
 
-store.subscribe(throttle(() => {
-    saveState(store.getState());
-  }, 1000));
+// store.subscribe(throttle(() => {
+//     saveState(store.getState());
+//   }, 1000));
 
 export default store;
