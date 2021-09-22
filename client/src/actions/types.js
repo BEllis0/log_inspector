@@ -11,17 +11,16 @@ export const actions = {
     register: {
         REGISTER_USER: 'REGISTER_USER'
     },
+    user: {
+        FETCH_PROFILE: 'FETCH_PROFILE',
+        FETCH_DATA_BY_USER: 'FETCH_DATA_BY_USER',
+    },
+    company: {
+        FETCH_DATA_BY_COMPANY: 'FETCH_DATA_BY_COMPANY',
+    },
     // page change reference for different displays
     pageChange: {
         PAGE_CHANGE: 'PAGE_CHANGE'
-    },
-    //profile information
-    profile: {
-        FETCH_PROFILE: 'FETCH_PROFILE',
-    },
-    fetchData: {
-        FETCH_DATA_BY_USER: 'FETCH_DATA_BY_USER',
-        FETCH_DATA_BY_COMPANY: 'FETCH_DATA_BY_COMPANY',
     },
     //error handling
     error: {
