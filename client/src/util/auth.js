@@ -24,7 +24,7 @@ export const AuthPost = (url, data) => {
 
 export const AuthGet = (url) => {
     return new Promise((resolve, reject) => {
-        axios.post(url, {
+        axios.get(url, {
             headers: {
                 "content-type": "application/json",
             },
@@ -41,7 +41,7 @@ export const AuthGet = (url) => {
 
 export const AuthPatch = (url, data) => {
     return new Promise((resolve, reject) => {
-        axios.post(url, {
+        axios.patch(url, {
             headers: {
                 "content-type": "application/json",
             },
