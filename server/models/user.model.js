@@ -34,6 +34,7 @@ const UserSchema = new Schema({
     group: { // for enterprise level
         type: String,
         required: false,
+        default: '',
     },
     clientApiKey: {
         type: String,
@@ -45,6 +46,7 @@ const UserSchema = new Schema({
     company: {
         type: String,
         required: false,
+        default: '',
     },
     companyId: ObjectId, // for enterprise level
     domains: Array,// used for whitelisting domains that can send messages
