@@ -1,8 +1,31 @@
 @import './variables.scss';
 
+@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
+
 // ===============
 // General page helpers
 // ===============
+
+* {
+    font-family: 'Oxygen', sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+h1, h2, h3, h4, p {
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
 
 .overflow-hidden {
     overflow: hidden;
@@ -14,6 +37,26 @@
 
 .overflow-y-hidden {
     overflow-y: hidden;
+}
+
+// ===============
+// Font
+// ===============
+
+.heading {
+    font-size: 36px;
+}
+
+.subHeading {
+    font-size: 30px;
+}
+
+.highlight {
+    font-size: 25px;
+}
+
+p, li {
+    font-size: 21px;
 }
 
 // ===============
@@ -56,6 +99,32 @@
     flex-direction: column-reverse;
 }
 
+// width helpers
+
+.w6 {
+    width: 50%;
+}
+
+// Format Containers
+
+.container {
+    padding: 20px 0px;
+    margin: 0px 50px;
+}
+
+.widgetContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.widget {
+    padding: 25px;
+    background-color: $widgetContainer;
+    border-radius: 6px;
+    margin: 15px;
+}
+
 // Margins
 
 .contentMargin {
@@ -67,7 +136,17 @@
     margin-right: 20px;
 }
 
-// Navigation Links
+// Dividers
+
+.divider-100 {
+    padding: 2px 0px;
+    width: 100%;
+    height: 2px;
+    background-color: $darkBlue;
+    border-radius: 10px;
+}
+
+// Navigation-related
 
 .primaryNavLink {
     margin: 0 20px;
@@ -76,4 +155,43 @@
     text-decoration: none;
     color: $darkBlue;
     font-weight: 500;
+}
+
+.tabsList {
+    padding: 20px
+}
+
+.tabItem {
+    margin: 0 20px;
+    font-weight: 600;
+}
+
+.tabItem:hover {
+    border-bottom: 5px solid $orange;
+}
+
+// buttons
+
+.primaryCTA {
+    padding: 10px;
+    color: white;
+    background-color: $lightBlue;
+    border-radius: 10px;
+    margin: 5px 10px;
+}
+
+.secondaryCTA {
+    font-size: $secondaryCTA;
+    color: $orange;
+    font-weight: 600;
+}
+
+//border boxes
+
+.orangeBorderBox {
+    background-color: transparent;
+    border: 4px solid $orange;
+    border-radius: 10px;
+    padding: 10px;
+    color: $orange;
 }
