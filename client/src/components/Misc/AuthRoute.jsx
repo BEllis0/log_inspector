@@ -21,7 +21,7 @@ const AuthRoute = ({component: Component, ...rest}) => {
       {...rest}
       render={(props) => 
         props.type === "guest" && props.loggedIn === false ? <Component {...props} />
-        : props.type === "guest" && props.loggedIn === true ? <Redirect to={{pathname: '/profile', state: {from: props.location}}} />
+        : props.type === "guest" && props.loggedIn === true ? <Redirect to={{pathname: 'account/profile', state: {from: props.location}}} />
         : props.type === "private" && props.loggedIn === true ? <Component {...props} />
         : <Redirect to={{pathname: '/sign-in', state: {from: props.location}}} />
       }
