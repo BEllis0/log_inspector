@@ -11,11 +11,14 @@ module.exports = {
                 const { user_id } = req.user;
                 User.findById(user_id)
                     .then(user => {
-                        const { email, username, group, company, domains } = user;
+                        const { email, firstName, lastName, username, group, clientApiKey, company, domains } = user;
                         const payload = {
                             email,
+                            firstName,
+                            lastName,
                             username,
                             group,
+                            clientApiKey,
                             company,
                             domains
                         };
