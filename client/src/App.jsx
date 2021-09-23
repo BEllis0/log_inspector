@@ -20,15 +20,25 @@ class App extends React.Component {
     render() {
         return (
             <div>
+
+                {/* Sign In and Register */}
                 <Route exact path="/register"  component={RegisterOrSignIn} />
-                
                 <AuthRoute exact path="/sign-in" component={RegisterOrSignIn} type="guest">
-                    {this.props.loggedIn ? <Redirect to="/profile" /> : <RegisterOrSignIn /> }
+                    {this.props.loggedIn ? <Redirect to="/account/profile" /> : <RegisterOrSignIn /> }
                 </AuthRoute>
                 
-                <AuthRoute exact path="/profile" type="private">
+                {/* Account Related */}
+                <AuthRoute exact path="/account/profile" type="private">
                     <Profile />
                 </AuthRoute>
+                <AuthRoute exact path="/account/groups" component={Profile} type="private" />
+                <AuthRoute exact path="/account/domain-whitelist" component={Profile} type="private" />
+
+                {/* Edge Case Routes - handle incorrect pathing */}
+                <AuthRoute exact path='/profile' type="private">
+                    <Redirect to="/account/profile" />
+                </AuthRoute>
+                
                 {/* <Route exact path="/" component={Home} /> */}
                 {/* <Route path="/error" component={ErrorPage} /> */}
             </div>
