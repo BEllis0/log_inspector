@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux'; // connect to store
 import { login } from '../../../actions/login.js';
 import { getProfile } from '../../../actions/profile.js';
+import { getMessagesByUser } from '../../../actions/messages.js';
 
 // UI kit components
 import Avatar from '@mui/material/Avatar';
@@ -32,6 +33,7 @@ const SignInForm = props => {
         })
         .then(() => {
             props.getProfile();
+            props.getMessagesByUser();
         })
     };
 
@@ -113,7 +115,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     login,
-    getProfile
+    getProfile,
+    getMessagesByUser,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignInForm));
