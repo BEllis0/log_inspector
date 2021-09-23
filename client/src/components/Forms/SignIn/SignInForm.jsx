@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { withRouter } from 'react-router';
-import { useHistory } from 'react-router-dom';
 
 // redux
 import { connect } from 'react-redux'; // connect to store
@@ -21,8 +20,6 @@ import Typography from '@mui/material/Typography';
 import Copyright from '../../Misc/Copyright.jsx';
 
 const SignInForm = props => {
-
-    let history = useHistory();
 
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
