@@ -2,7 +2,6 @@ import React from 'react';
 import { withRouter, BrowserHistory } from 'react-router';
 
 // components
-import { PrimaryTemplate } from '../../Templates/Primary/PrimaryTemplate.jsx';
 
 // redux
 import { connect } from 'react-redux'; // connect to store
