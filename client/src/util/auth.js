@@ -59,7 +59,8 @@ export const AuthPatch = (url, data) => {
 
 export const AuthDelete = (url, data) => {
     return new Promise((resolve, reject) => {
-        axios.post(url, {
+        console.log('data to delete', data)
+        axios.delete(url, {
             headers: {
                 "content-type": "application/json",
             },
