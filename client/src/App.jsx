@@ -4,6 +4,8 @@ import { Route } from "react-router-dom";
 // redux
 import { connect } from 'react-redux'; // connect to store
 import styles from './styles/global.scss';
+import { getProfile } from './actions/users.js';
+import { getMessagesByUser } from './actions/messages.js';
 
 // components
 import AuthRoute from './components/Misc/AuthRoute.jsx';
@@ -13,8 +15,12 @@ import Profile from './components/Views/Profile/Profile';
 
 class App extends React.Component {
 
+
     componentDidMount() {
-        console.log('mounted')
+        if (this.props.loggedIn) {
+            this.props.getProfile();
+            this.props.getMessagesByUser();
+        }
     }
     
     render() {
@@ -47,11 +53,13 @@ class App extends React.Component {
 };
 
 const mapStateToProps = state => ({
+    state: state,
     loggedIn: state.login.loggedIn,
 });
 
 const mapDispatchToProps = {
-    // loginCheck,
+    getProfile,
+    getMessagesByUser,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
