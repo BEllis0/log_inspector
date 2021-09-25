@@ -3,6 +3,7 @@ const ValidationCode = require('../models/validationCode.model.js');
 const { generateApiKey } = require('../util/generateApiKey.js');
 const jwt = require('jsonwebtoken');
 const { emailService } = require('../util/nodeMailer.js');
+const { domainValidation } = require('../util/domainValidation.js');
 
 module.exports = {
     user: {
@@ -135,7 +136,7 @@ module.exports = {
                     })
                     .catch(err => {
                         console.log('Error updating username', err);
-                        res.status(400).json({message: "Error updating username"});
+                        res.status(400).json({message: "Error updating username."});
                     });
             },
             password: (req, res) => {
@@ -147,23 +148,42 @@ module.exports = {
                     })
                     .catch(err => {
                         console.log('Error updating password', err);
-                        res.status(400).json({message: "Error updating password"});
+                        res.status(400).json({message: "Error updating password."});
                     });
             },
             email: (req, res) => {
                 const { user_id } = req.user;
-                const { email } = req.body;
+                const { email } = req.body.data;
                 User.findByIdAndUpdate(user_id, { email })
                     .then(response => {
                         res.status(200).json({message: "Email successfully updated.", data: email });
                     })
                     .catch(err => {
                         console.log('Error updating email', err);
-                        res.status(400).json({message: "Error updating email"});
+                        res.status(400).json({message: "Error updating email."});
                     });
             },
-            fields: (req, res) => {
-                
+            domains: (req, res) => {
+                const { user_id } = req.user;
+                const { domainName } = req.body.data;
+
+                if (domainValidation(domainName)) {
+
+                User.findByIdAndUpdate(user_id, 
+                    { $push: { domains: domainName } 
+                    })
+                    .then(response => {
+                        console.log('domain added', response)
+                        res.status(200).json({message: "Domain successfully added.", data: response.domains });
+                    })
+                    .catch(err => {
+                        console.log('Error adding domain', err);
+                        res.status(400).json({message: "Error adding domain."});
+                    });
+                } else {
+                    console.log('Not a valid domain', domainName)
+                    res.status(400).json({ message: "Not a valid domain name. Please enter a domain in the format mysite.ext" });
+                }
             },
         },
         delete: {
@@ -177,6 +197,20 @@ module.exports = {
                         console.log('Error deleting user', err);
                         res.status(400).json({message: "Error deleting user"});
                     });
+            },
+            domain: (req, res) => {
+                const { user_id } = req.user;
+                const { domainName } = req.body.data || req.body;
+                User.findByIdAndUpdate(user_id, { 
+                    $pull: { domains: domainName } 
+                })
+                .then(response => {
+                    res.status(200).json({ message: "Domain successfully deleted.", data: response.domains });
+                })
+                .catch(err => {
+                    console.log('Error deleting domain', err);
+                    res.status(400).json({message: "Error deleting domain."});
+                });
             },
         },
     },
