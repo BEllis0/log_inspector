@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 // redux
 import { connect } from 'react-redux'; // connect to store
 import { login } from '../../../actions/login.js';
-import { getProfile } from '../../../actions/profile.js';
+import { getProfile } from '../../../actions/users.js';
 import { getMessagesByUser } from '../../../actions/messages.js';
 
 // UI kit components
