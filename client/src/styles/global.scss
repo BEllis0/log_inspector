@@ -2,6 +2,36 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
 
+// media queries
+$tablet-width: 768px;
+$desktop-width: 1024px;
+$mobile-width: 500px;
+$xs-mobile-width: 320px;
+
+@mixin xs-mobile {
+    @media (max-width: #{$xs-mobile-width}) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media (min-width: #{$xs-mobile-width}) and (max-width: #{$mobile-width}) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: #{$desktop-width}) {
+        @content;
+    }
+}
+
 // ===============
 // General page helpers
 // ===============
@@ -27,6 +57,10 @@ a, a:hover, a:focus, a:active {
     color: inherit;
 }
 
+.strong {
+    font-weight: 600;
+}
+
 .overflow-hidden {
     overflow: hidden;
 }
@@ -49,13 +83,14 @@ a, a:hover, a:focus, a:active {
 
 .subHeading {
     font-size: 30px;
+    color: $lightBlue;
 }
 
 .highlight {
     font-size: 25px;
 }
 
-p, li {
+p, li, input, button {
     font-size: 21px;
 }
 
@@ -79,8 +114,16 @@ p, li {
     justify-content: space-between;
 }
 
-.flex-align-center {
+.flex-ac {
     align-items: center;
+}
+
+.flex-as {
+    align-items: flex-end;
+}
+
+.flex-ae {
+    align-items: flex-end;
 }
 
 .flex-direction-row {
@@ -99,10 +142,52 @@ p, li {
     flex-direction: column-reverse;
 }
 
+.wrap {
+    flex-wrap: wrap;
+}
+
+.no-wrap {
+    flex-wrap: nowrap;
+}
+
 // width helpers
+
+.w3 {
+    width: 25%;
+}
+
+.w4 {
+    width: 30%;
+}
 
 .w6 {
     width: 50%;
+    @include mobile {
+        width: 100%
+    }
+}
+
+.w12 {
+    width: 100%;
+}
+
+.fb3 {
+    flex-basis: 25%;
+}
+
+.fb4 {
+    flex-basis: 30%;
+}
+
+.fb6 {
+    flex-basis: calc(50% - 5px);
+    @include mobile {
+        flex-basis: 100%;
+    }
+}
+
+.fb12 {
+    flex-basis: 100%;
 }
 
 // Format Containers
@@ -114,15 +199,26 @@ p, li {
 
 .widgetContainer {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 20px 0px;
     width: 100%;
+    max-width: 100%;
+    gap: 10px;
+
+    @include mobile {
+        flex-direction: column;
+    }
 }
 
 .widget {
-    padding: 25px;
+    // padding: 25px;
     background-color: $widgetContainer;
     border-radius: 6px;
-    margin: 15px;
+    // margin: 10px 7px;
+}
+
+.widget > div {
+    padding: 25px;
 }
 
 // Margins
@@ -134,6 +230,11 @@ p, li {
 .margin-lr-20 {
     margin-left: 20px;
     margin-right: 20px;
+}
+
+.margin-lr-10 {
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 // Dividers
@@ -148,7 +249,7 @@ p, li {
 
 // Navigation-related
 
-.primaryNavLink {
+.navLink {
     margin: 0 20px;
     padding: 5px;
     font-size: 20px;
@@ -173,7 +274,7 @@ p, li {
 // buttons
 
 .primaryCTA {
-    padding: 10px;
+    padding: 10px 20px;
     color: white;
     background-color: $lightBlue;
     border-radius: 10px;
@@ -194,4 +295,11 @@ p, li {
     border-radius: 10px;
     padding: 10px;
     color: $orange;
+}
+
+@include mobile {
+    .w3, .w4, .w6, .fb3, .fb4, .fb6 {
+        width: 100%;
+        flex-basis: 100%;
+    }
 }
