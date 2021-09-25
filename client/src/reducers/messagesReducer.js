@@ -15,12 +15,11 @@ export default function(state = initialState, action) {
                 error: null
             }
         // err
-        case actions.error.UPDATE_ERROR:
+        case actions.error.FETCH_MESSAGES_ERROR:
             return {
                 ...state,
-                error: action.payload.message || action.payload
+                error: action.payload
             }
-        
         default:
             return state;
     }

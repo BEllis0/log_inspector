@@ -11,23 +11,23 @@ export default function(state = initialState, action) {
         case actions.login.LOGIN:
             return {
                 ...state,
-                loggedIn: action.payload,
+                loggedIn: true,
                 error: null
             }
         // logout
-        case actions.logout:
+        case actions.logout.LOGOUT:
             return {
                 ...state,
-                loggedIn: action.payload,
+                loggedIn: false,
                 error: null
             }
-        // err
-        case actions.error.UPDATE_ERROR:
+        // token authenticatio err
+        case actions.error.TOKEN_ERROR:
             return {
                 ...state,
+                loggedIn: false,
                 error: action.payload
             }
-        
         default:
             return state;
     }
