@@ -1,32 +1,32 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { withRouter } from 'react-router';
-
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import styles from './NewDomain.module.scss';
 
 import { connect } from 'react-redux'; // connect to store
+import { updateDomains } from '../../../actions/users.js';
 
 const NewDomainForm = (props) => {
-  return (
-    <Box
-      component="form"
-      sx={{
-        '& > :not(style)': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <TextField id="standard-basic" label="Domain" variant="standard" />
-    </Box>
-  );
+    const  [domainName, updateDomainName] = useState('');
+
+    const handleSubmitDomain = (e) => {
+        e.preventDefault();
+        props.updateDomains(domainName);
+    };
+
+    const handleInputChange = (e) => {
+        updateDomainName(e.target.value);
+    };
+
+    return (
+        <form onSubmit={handleSubmitDomain} className={styles.domainForm}>
+            <input className="primaryCTA" type="submit" />
+            <input onChange={handleInputChange} id={styles.formInput} placeholder="mywebsite.com" type="text" />
+        </form>
+    );
 };
-
-const mapStateToProps = state => ({
-
-});
 
 const mapDispatchToProps = {
-
+    updateDomains
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NewDomainForm));
+export default withRouter(connect(null, mapDispatchToProps)(NewDomainForm));
