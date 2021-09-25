@@ -15,11 +15,11 @@ const PrimaryNav = props => {
             <div className="flex flex-justify-sb contentMargin">
                 <img src={logo} className={styles.logo} />
                 
-                <div className="flex flex-align-center flex-justify-sa">
+                <div className="flex flex-ac flex-justify-sa">
                     {primaryNavLinks.map((link, i) => {
                         return (
                             <Link 
-                                className="primaryNavLink"
+                                className="navLink"
                                 key={i}
                                 to={link.href}
                             >
