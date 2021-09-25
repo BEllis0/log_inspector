@@ -13,10 +13,18 @@ export function getMessagesByUser() {
         })
         .catch(error => {
             console.log('get messages error: ', error)
-            dispatch({
-                type: actions.error.UPDATE_ERROR,
-                payload: { message: error }
-            });
+            if (error.response.status === 401 || error.response.status === 403) {
+                console.log('unathorized error')
+                dispatch({
+                    type: actions.error.TOKEN_ERROR,
+                    payload: error
+                });
+            } else {
+                dispatch({
+                    type: actions.error.FETCH_MESSAGES_ERROR,
+                    payload: error
+                });
+            }
         });
     };
 };

@@ -1,5 +1,4 @@
 import { actions } from './types.js';
-import Axios from 'axios';
 import { AuthPost } from '../util/auth.js';
 
 export function login(payloadData) {
@@ -16,7 +15,7 @@ export function login(payloadData) {
         .catch(error => {
             console.log('login error: ', error)
             dispatch({
-                type: actions.error.UPDATE_ERROR,
+                type: actions.error.LOGGIN_ERROR,
                 payload: { message: error, isLoggedIn: false }
             });
         });
