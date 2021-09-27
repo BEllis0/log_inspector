@@ -130,7 +130,7 @@ module.exports = {
             username: (req, res) => {
                 const { user_id } = req.user;
                 const { username } = req.body;
-                User.findByIdAndUpdate(user_id, { username })
+                User.findByIdAndUpdate(user_id, { username }, { new: true })
                     .then(response => {
                         res.status(200).json({message: "Username successfully updated.", data: username });
                     })
@@ -142,7 +142,7 @@ module.exports = {
             password: (req, res) => {
                 const { user_id } = req.user;
                 const { password } = req.body;
-                User.findByIdAndUpdate(user_id, { password })
+                User.findByIdAndUpdate(user_id, { password }, { new: true })
                     .then(response => {
                         res.status(200).json({message: "Password successfully updated." });
                     })
@@ -154,9 +154,32 @@ module.exports = {
             email: (req, res) => {
                 const { user_id } = req.user;
                 const { email } = req.body.data;
-                User.findByIdAndUpdate(user_id, { email })
+                User.findByIdAndUpdate(user_id, { email }, { new: true })
                     .then(response => {
                         res.status(200).json({message: "Email successfully updated.", data: email });
+                    })
+                    .catch(err => {
+                        console.log('Error updating email', err);
+                        res.status(400).json({message: "Error updating email."});
+                    });
+            },
+            user_settings: async (req, res) => {
+                const { user_id } = req.user;
+                const { username, firstName, lastName, email } = req.body.data || req.body;
+
+                const updates = {};
+
+                if (username) updates["username"] = username;
+                if (firstName) updates["firstName"] = firstName;
+                if (lastName) updates["lastName"] = lastName;
+                if (email) updates["email"] = email;
+
+                console.log('updates: ', updates)
+
+                User.findByIdAndUpdate(user_id, updates, {new: true})
+                    .then(response => {
+                        console.log('user settingns updated res', response)
+                        res.status(200).json({message: "User settings updated.", data: response });
                     })
                     .catch(err => {
                         console.log('Error updating email', err);
@@ -169,9 +192,9 @@ module.exports = {
 
                 if (domainValidation(domainName)) {
 
-                User.findByIdAndUpdate(user_id, 
-                    { $push: { domains: domainName } 
-                    })
+                    User.findByIdAndUpdate(user_id, 
+                    { $push: { domains: domainName } }, 
+                    {new: true})
                     .then(response => {
                         console.log('domain added', response)
                         res.status(200).json({message: "Domain successfully added.", data: response.domains });
@@ -201,9 +224,9 @@ module.exports = {
             domain: (req, res) => {
                 const { user_id } = req.user;
                 const { domainName } = req.body.data || req.body;
-                User.findByIdAndUpdate(user_id, { 
-                    $pull: { domains: domainName } 
-                })
+                User.findByIdAndUpdate(user_id, 
+                    { $pull: { domains: domainName } },
+                    { new: true })
                 .then(response => {
                     res.status(200).json({ message: "Domain successfully deleted.", data: response.domains });
                 })
