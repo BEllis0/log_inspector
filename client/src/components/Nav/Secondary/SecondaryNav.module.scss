@@ -1,5 +1,7 @@
 @import '../../../styles/variables.scss';
 
-#appBar {
-    background-color: $darkBlue
+.secondaryNavContainer {
+    width: 100%;
+    background-color: $darkBlue;
+    min-height: 75px;
 }
