@@ -27,6 +27,9 @@ class App extends React.Component {
         return (
             <div>
 
+                {/* Public Pages */}
+                <Route exact path="/" component={Home} />
+
                 {/* Sign In and Register */}
                 <Route exact path="/register"  component={RegisterOrSignIn} />
                 <AuthRoute exact path="/sign-in" component={RegisterOrSignIn} type="guest">
@@ -45,7 +48,7 @@ class App extends React.Component {
                     <Redirect to="/account/profile" />
                 </AuthRoute>
                 
-                {/* <Route exact path="/" component={Home} /> */}
+                
                 {/* <Route path="/error" component={ErrorPage} /> */}
             </div>
         )
