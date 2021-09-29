@@ -4,11 +4,18 @@ import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
+import { withRouter } from 'react-router';
+
+// redux
+import { connect } from 'react-redux'; // connect to store
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default Snackbar = (props) => {
+const SnackbarAlerts = (props) => {
+
+    console.log('snackbar props', props)
   
     const [open, setOpen] = React.useState(false);
 
@@ -28,4 +35,11 @@ export default Snackbar = (props) => {
       </Snackbar>
     </Stack>
   );
-}
+};
+
+const mapStateToProps = state => ({
+    loginErrorMessage: state.login,
+
+});
+
+export default withRouter(connect(mapStateToProps, null)(SnackbarAlerts));
