@@ -12,9 +12,7 @@ export function getMessagesByUser() {
             });
         })
         .catch(error => {
-            console.log('get messages error: ', error)
             if (error.response.status === 401 || error.response.status === 403) {
-                console.log('unathorized error')
                 dispatch({
                     type: actions.error.TOKEN_ERROR,
                     payload: error
