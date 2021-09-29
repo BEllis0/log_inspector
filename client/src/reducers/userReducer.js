@@ -15,6 +15,19 @@ export default function(state = initialState, action) {
                 error: null
             }
         // update last name
+        case actions.user.UPDATE_USER_SETTINGS:
+            return {
+                ...state,
+                profile: {
+                    ...state.profile,
+                    firstName: action.payload.data.data.firstName,
+                    lastName: action.payload.data.data.lastName,
+                    username: action.payload.data.data.username,
+                    email: action.payload.data.data.email,
+                },
+                error: null
+            }
+        // update last name
         case actions.user.UPDATE_LAST_NAME:
             return {
                 ...state,
