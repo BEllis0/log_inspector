@@ -13,7 +13,7 @@ const PrimaryNav = props => {
     return (
         <div className={styles.primaryNavContainer}>
             <div className="flex flex-justify-sb contentMargin">
-                <img src={logo} className={styles.logo} />
+                <Link to="/"><img src={logo} className={styles.logo} /></Link>
                 
                 <div className="flex flex-ac flex-justify-sa">
                     {primaryNavLinks.map((link, i) => {
