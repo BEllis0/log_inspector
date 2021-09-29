@@ -1,6 +1,13 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = {
+    get: {
+        // poll the server for token expiration
+        poll: (req, res) => {
+            // if req makes it to this handler, just send success
+            res.status(200).end();
+        }
+    },
     post: {
         refresh: (req, res) => {
             console.log(req)
