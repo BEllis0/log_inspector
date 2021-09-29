@@ -19,6 +19,7 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 loggedIn: false,
+                message: action.payload.message,
                 error: null
             }
         // token authenticatio err
@@ -27,6 +28,19 @@ export default function(state = initialState, action) {
                 ...state,
                 loggedIn: false,
                 error: action.payload
+            }
+            // login
+        case actions.error.LOGIN_ERROR:
+            return {
+                ...state,
+                loggedIn: false,
+                error: action.payload.message
+            }
+        case actions.error.LOGOUT_ERROR:
+            return {
+                ...state,
+                loggedIn: false,
+                error: action.payload.message
             }
         default:
             return state;
