@@ -6,6 +6,7 @@ import { connect } from 'react-redux'; // connect to store
 import PrimaryNav from '../../Nav/Primary/PrimaryNav.jsx';
 import RegisterForm from '../../Forms/Register/RegisterForm.jsx';
 import SignInForm from '../../Forms/SignIn/SignInForm.jsx';
+import SnackbarAlerts from '../../Misc/Snackbar/Snackbar.jsx';
 
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
@@ -48,6 +49,9 @@ const RegisterOrSignIn = (props) => {
                 }
       
             </Grid>
+
+            <SnackbarAlerts />
+
         </ThemeProvider>
     );
 };
