@@ -1,34 +1,42 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router';
 import { Redirect } from "react-router-dom";
-import { connect } from 'react-redux'; // connect to store
 import styles from './Profile.module.scss';
+
+import { connect } from 'react-redux'; // connect to store
+import { updateUserSettings } from '../../../actions/users.js';
 
 import AuthNav from '../../Nav/AuthNav/AuthNav.jsx';
 import SecondaryNav from '../../Nav/Secondary/SecondaryNav.jsx';
 import ProfileTabs from '../../Nav/ProfileTabs/ProfileTabs.jsx';
 import NewDomainForm from '../../Forms/NewDomain/NewDomain.jsx';
 import DomainWhitelist from '../../Lists/DomainWhitelist/DomainWhitelist.jsx';
+import SnackbarAlerts from '../../Misc/Snackbar/Snackbar.jsx';
 
 const ProfileView = (props) => {
 
     const { user, location, loggedIn } = props;
-
     const [editModeOn, changeEditMode] = useState(false);
-    const [newUsername, updateUsername] = useState(user.username);
-    const [newName, updateName] = useState(`${user.firstName} ${user.lastName}`);
 
     const handleSaveEditClick = e => {
         // currently in editing mode
         if (editModeOn) {
+
+            let payload = {};
             // if username was changed
             if (document.getElementById('usernameEditable').innerHTML !== user.username) {
-                // update  username
-                console.log('username changed')
+                payload["username"] = document.getElementById('usernameEditable').innerHTML;
             }
-
+            // name changed
             if (document.getElementById('nameEditable').innerHTML !== `${user.firstName} ${user.lastName}`) {
-                console.log('name changed')
+                let name = document.getElementById('nameEditable').innerHTML.split(' ');
+                payload["firstName"] = name[0];
+                payload["lastName"] = name[1];
+            }
+            // if anything changed, run action
+            if (Object.keys(payload).length > 0) {
+                console.log('running action')
+                props.updateUserSettings(payload);
             }
         }
         // swap edit mode to on/off
@@ -53,11 +61,13 @@ const ProfileView = (props) => {
     }
     
     return (
-        <div>
+        <>
         
+        {/* Navs */}
         <AuthNav />
         <SecondaryNav />
         
+        {/* Page Body */}
         <div className="container">
 
         <ProfileTabs />
@@ -152,10 +162,12 @@ const ProfileView = (props) => {
                 </div>
             </div>
         }
+
+        <SnackbarAlerts />
         
         </div>
         
-        </div>
+        </>
     )
     
 };
@@ -166,7 +178,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-
+    updateUserSettings
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProfileView));
