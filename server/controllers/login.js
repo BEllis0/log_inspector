@@ -37,7 +37,7 @@ module.exports = {
                         payload,
                         process.env.JWT_KEY,
                         {
-                            expiresIn: "15m" // 1 year in seconds
+                            expiresIn: "15m"
                         },
                     );
 
