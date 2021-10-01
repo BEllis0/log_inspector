@@ -1,0 +1,15 @@
+@import '../../../styles/variables.scss';
+
+#bladeOne {
+    background-color: $darkBlue;
+    color: white;
+}
+
+#bladeTwo {
+    background-color: $widgetContainer;
+    // color: white;
+}
+
+.blurbImg {
+    max-height: 200px;
+}
