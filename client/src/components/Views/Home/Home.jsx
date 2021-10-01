@@ -33,8 +33,8 @@ const Home = props => {
             {/* Hero Section */}
             <HomeHero />
 
-            {/* Blade 1 */}
-            <div id={styles.bladeOne}>
+            {/* What is Log Inspector Blade */}
+            <div className={styles.bladeWhatIsIt} id="bladeWhatIsIt">
                 <div className="container">
                     <div className="bladeHeader tac">
                         <h1 className="heading">What is Log Inspector?</h1>
@@ -49,8 +49,44 @@ const Home = props => {
                 </div>
             </div>
 
-            {/* Blade 2 */}
-            <div id={styles.bladeTwo}>
+            {/* Features Blade */}
+            <div className={styles.bladeFeatures} id="bladeFeatures">
+                <div className="container">
+                    <div className="bladeHeader">
+                        <h1 className="heading">Key Features</h1>
+                    </div>
+                    <div className="flex col3-container">
+                        <div className="fb4">
+                            <img src={dataVizImg} className={styles.blurbImg} />
+                            <h2>Realtime Data</h2>
+                            <p>
+                                Data visualizations updated in realtime. Monitor issues accross your application from a high level
+                                and get notified when problems occur.
+                            </p>
+                        </div>
+                        <div className="fb4">
+                            <img src={openSourceImg} className={styles.blurbImg} />
+                            <h2>Easy Integration</h2>
+                            <p>
+                                Once you have an account, install the log-inspector package dependency on your application 
+                                and configure the settings with the API key found on your profile.
+                            </p>
+                        </div>
+                        <div className="fb4">
+                            <img src={debuggingImg} className={styles.blurbImg} />
+                            <h2>Debugging Support</h2>
+                            <p>
+                                Know when and where problems are occuring on your application. 
+                                Provides your developers the insights and tooling they need to debug issues quickly.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </div>
+
+            {/* How it works blade */}
+            <div className={styles.bladeHowItWorks} id="bladeHowItWorks">
                 <div className="container">
                     <div className="bladeHeader">
                         <h1 className="heading">How it works</h1>
@@ -104,42 +140,6 @@ const Home = props => {
                         </div>
                     </div>
                 </div>
-            </div>
-
-            {/* Blade 3 */}
-            <div id={styles.bladeThree}>
-                <div className="container">
-                    <div className="bladeHeader">
-                        <h1 className="heading">Key Features</h1>
-                    </div>
-                    <div className="flex col3-container">
-                        <div className="fb4">
-                            <img src={dataVizImg} className={styles.blurbImg} />
-                            <h2>Realtime Data</h2>
-                            <p>
-                                Data visualizations updated in realtime. Monitor issues accross your application from a high level
-                                and get notified when problems occur.
-                            </p>
-                        </div>
-                        <div className="fb4">
-                            <img src={openSourceImg} className={styles.blurbImg} />
-                            <h2>Easy Integration</h2>
-                            <p>
-                                Once you have an account, install the log-inspector package dependency on your application 
-                                and configure the settings with the API key found on your profile.
-                            </p>
-                        </div>
-                        <div className="fb4">
-                            <img src={debuggingImg} className={styles.blurbImg} />
-                            <h2>Debugging Support</h2>
-                            <p>
-                                Know when and where problems are occuring on your application. 
-                                Provides your developers the insights and tooling they need to debug issues quickly.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <br />
             </div>
 
             <PublicFooter  />
