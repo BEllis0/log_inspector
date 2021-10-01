@@ -1,17 +1,17 @@
 import * as React from 'react';
+import styles from './Copyright.module.scss';
 
-import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 
 export default function Copyright(props) {
     return (
-      <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      <div style={{color: props.color || styles.copyright || "black"}} {...props}>
         {'Copyright © '}
-        <Link color="inherit" href="#">
+        <Link color="inherit" href="/">
           Log Inspector
         </Link>{' '}
         {new Date().getFullYear()}
         {'.'}
-      </Typography>
+      </div>
     );
   }
