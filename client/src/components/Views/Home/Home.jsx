@@ -15,6 +15,7 @@ import PrimaryNav from '../../Nav/Primary/PrimaryNav.jsx';
 import AuthNav from '../../Nav/AuthNav/AuthNav.jsx';
 import SnackbarAlerts from '../../Misc/Snackbar/Snackbar.jsx';
 import HomeHero from '../../Heros/Home/HomeHero.jsx';
+import PublicFooter from '../../Nav/PublicFooter/PublicFooter.jsx';
 
 
 const Home = props => {
@@ -35,11 +36,12 @@ const Home = props => {
             {/* Blade 1 */}
             <div id={styles.bladeOne}>
                 <div className="container">
-                    <div className="bladeHeader">
+                    <div className="bladeHeader tac">
                         <h1 className="heading">What is Log Inspector?</h1>
                     </div>
-                    <div>
+                    <div className="tac">
                         <p>Log Inspector provides a way to collect log messages and a place to monitor them.
+                            <br />
                             It makes tracking errors easy and speeds up the debugging process for developers. 
                         </p>
                         <br />
@@ -51,16 +53,47 @@ const Home = props => {
             <div id={styles.bladeTwo}>
                 <div className="container">
                     <div className="bladeHeader">
-                        <h1 className="heading">NPM / Yarn Package Integration</h1>
+                        <h1 className="heading">How it works</h1>
                     </div>
-                    <div className="flex">
-                        <div>
+                    <div>
+                        <p>Log Inspector relies on the use of a light-weight package dependency called &nbsp;
+                            <span className="strong ">log-inspector</span> to send data in realtime to your Log Inspector account.
+                        </p>
+                        <br />
+                    </div>
+                    <div className="flex col2-container">
+                        <div className="fb6">
+                            <h2>Step 1</h2>
+                            <h3>Register and whitelist domains</h3>
+                            <br />
+                            <p>
+                                <Link to="/register" className="linkOrange">Click here</Link> to create your free account.
+                                <br />
+                                <br />
+                                <Link to="/sign-in" className="linkOrange">Sign in</Link> and navigate to your profile settings.
+                                <br />
+                                <br />
+                                Add your domain(s) to the whitelist. This will allow the data to flow into your account.
+                            </p>
+
+                        </div>
+                        <div className="fb6">
+                            <h2>Step 2</h2>
+                            <h3>NPM / Yarn Package Integration</h3>
+                            <br />
                             <p>A simple logging tool that can be used for debugging in the browser. 
                                 Enabled in the console to display your _logger messages and ensure 
                                 that they are not seen by users.
                             </p>
+                            <br />
+                            <p>
+                                *Note: The Log Inspector package can be used without creating a Log Inspector account.
+                                It can be used as a simple browser debugging tool, or even integrated into your own log tracking
+                                system.
+                            </p>
                         </div>
                     </div>
+                    <br />
                     <div className="primaryCTA">Documentation</div>
                 </div>
             </div>
@@ -99,6 +132,8 @@ const Home = props => {
                     </div>
                 </div>
             </div>
+
+            <PublicFooter  />
 
             <SnackbarAlerts />
         </>
