@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import styles from './Home.module.scss';
 
 import debuggingImg from '../../../assets/debugging.jpg';
+import dataVizImg from '../../../assets/data-viz.jpg';
 import openSourceImg from '../../../assets/open_source.jpg';
-import realtimeImg from '../../../assets/realtime.jpg';
 
 // redux
 import { connect } from 'react-redux'; // connect to store
@@ -58,6 +58,9 @@ const Home = props => {
                     <div>
                         <p>Log Inspector relies on the use of a light-weight package dependency called &nbsp;
                             <span className="strong ">log-inspector</span> to send data in realtime to your Log Inspector account.
+                            Once the package integration is complete and logs are flowing into your account,
+                            Log Inspector provides a variety of data visualizations, options for notifications, 
+                            and the ability to build projects and assign tasks.
                         </p>
                         <br />
                     </div>
@@ -81,9 +84,13 @@ const Home = props => {
                             <h2>Step 2</h2>
                             <h3>NPM / Yarn Package Integration</h3>
                             <br />
-                            <p>A simple logging tool that can be used for debugging in the browser. 
-                                Enabled in the console to display your _logger messages and ensure 
-                                that they are not seen by users.
+                            <p>Using NPM or Yarn, add the package dependency&nbsp; 
+                                <a href="https://www.npmjs.com/package/log-inspector" target="_blank" className="strong linkOrange">log-inspector</a>
+                                &nbsp;to your application.
+                                <br />
+                                <br />
+                                Configure the package settings with the API key and API endpoint found on your profile settings. 
+                                Click the button below to see the full documentation for configuration.
                             </p>
                             <br />
                             <p>
@@ -91,10 +98,11 @@ const Home = props => {
                                 It can be used as a simple browser debugging tool, or even integrated into your own log tracking
                                 system.
                             </p>
+                            <br />
+                            <div className="primaryCTA">Documentation</div>
+                            <br />
                         </div>
                     </div>
-                    <br />
-                    <div className="primaryCTA">Documentation</div>
                 </div>
             </div>
 
@@ -106,31 +114,32 @@ const Home = props => {
                     </div>
                     <div className="flex col3-container">
                         <div className="fb4">
+                            <img src={dataVizImg} className={styles.blurbImg} />
+                            <h2>Realtime Data</h2>
+                            <p>
+                                Data visualizations updated in realtime. Monitor issues accross your application from a high level
+                                and get notified when problems occur.
+                            </p>
+                        </div>
+                        <div className="fb4">
                             <img src={openSourceImg} className={styles.blurbImg} />
-                            <h2>Open Source</h2>
-                            <p>A simple logging tool that can be used for debugging in the browser. 
-                                Enabled in the console to display your _logger messages and ensure 
-                                that they are not seen by users.
+                            <h2>Easy Integration</h2>
+                            <p>
+                                Once you have an account, install the log-inspector package dependency on your application 
+                                and configure the settings with the API key found on your profile.
                             </p>
                         </div>
                         <div className="fb4">
                             <img src={debuggingImg} className={styles.blurbImg} />
-                            <h2>Debugging</h2>
-                            <p>A simple logging tool that can be used for debugging in the browser. 
-                                Enabled in the console to display your _logger messages and ensure 
-                                that they are not seen by users.
-                            </p>
-                        </div>
-                        <div className="fb4">
-                            <img src={realtimeImg} className={styles.blurbImg} />
-                            <h2>Realtime</h2>
-                            <p>A simple logging tool that can be used for debugging in the browser. 
-                                Enabled in the console to display your _logger messages and ensure 
-                                that they are not seen by users.
+                            <h2>Debugging Support</h2>
+                            <p>
+                                Know when and where problems are occuring on your application. 
+                                Provides your developers the insights and tooling they need to debug issues quickly.
                             </p>
                         </div>
                     </div>
                 </div>
+                <br />
             </div>
 
             <PublicFooter  />
