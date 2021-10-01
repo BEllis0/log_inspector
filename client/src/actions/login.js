@@ -1,5 +1,5 @@
 import { actions } from './types.js';
-import { AuthPost } from '../util/auth.js';
+import { AuthPost, AuthGet } from '../util/auth.js';
 
 export function login(payloadData) {
     return function(dispatch) {
@@ -22,16 +22,33 @@ export function login(payloadData) {
     };
 };
 
+export function pollServer() {
+    return function(dispatch) {
+        return AuthGet('/api/v1/refresh/poll/token')
+        .then(response => {
+            console.log('Successfully pinged server.', response);
+            return Promise.resolve();
+        })
+        .catch(error => {
+            console.log('token poll error: ', error)
+            dispatch({
+                type: actions.error.TOKEN_ERROR,
+                payload: error
+            });
+        });
+    };
+};
+
 export function logout() {
     return function(dispatch) {
         return AuthPost('/api/v1/logout/')
         .then(response => {
             dispatch({
-                type: actions.login.LOGOUT,
+                type: actions.logout.LOGOUT,
                 payload: response
             });
 
-            return Promise.resolve();
+            // return Promise.resolve();
         })
         .catch(error => {
             console.log('logout error: ', error)
