@@ -77,6 +77,10 @@ a, a:hover, a:focus, a:active {
 // Font
 // ===============
 
+.heroTitle {
+    font-size: 45px;
+}
+
 .heading {
     font-size: 36px;
 }
@@ -150,6 +154,10 @@ p, li, input, button {
     flex-wrap: nowrap;
 }
 
+.tac {
+    text-align: center;
+}
+
 // width helpers
 
 .w3 {
@@ -157,7 +165,7 @@ p, li, input, button {
 }
 
 .w4 {
-    width: 30%;
+    width: 33%;
 }
 
 .w6 {
@@ -176,7 +184,7 @@ p, li, input, button {
 }
 
 .fb4 {
-    flex-basis: 30%;
+    flex-basis: calc(33% - 5px);
 }
 
 .fb6 {
@@ -193,8 +201,12 @@ p, li, input, button {
 // Format Containers
 
 .container {
-    padding: 20px 0px;
-    margin: 0px 50px;
+    padding: 30px 0px;
+    margin: 0px 70px;
+}
+
+.col3-container {
+    gap: 10px;
 }
 
 .widgetContainer {
@@ -221,10 +233,22 @@ p, li, input, button {
     padding: 25px;
 }
 
+.bladeHeader {
+    padding: 30px 0px;
+}
+
 // Margins
 
 .contentMargin {
     margin: 0 50px;
+}
+
+.margin-r-20 {
+    margin-right: 20px;
+}
+
+.margin-l-20 {
+    margin-left: 20px;
 }
 
 .margin-lr-20 {
@@ -275,14 +299,20 @@ p, li, input, button {
 
 .primaryCTA {
     padding: 10px 20px;
+    font-weight: 600;
+    font-size: $primaryCTA;
+    width: fit-content;
+    text-align: center;
     color: white;
     background-color: $lightBlue;
     border-radius: 10px;
-    margin: 5px 10px;
+    margin: 5px 0;
 }
 
 .secondaryCTA {
     font-size: $secondaryCTA;
+    width: fit-content;
+    text-align: center;
     color: $orange;
     font-weight: 600;
 }
