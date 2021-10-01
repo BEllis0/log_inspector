@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 
 // redux
 import { connect } from 'react-redux'; // connect to store
-import { login } from '../../../actions/login.js';
+import { login, pollServer } from '../../../actions/login.js';
 import { getProfile } from '../../../actions/users.js';
 import { getMessagesByUser } from '../../../actions/messages.js';
 
@@ -34,6 +34,11 @@ const SignInForm = props => {
         .then(() => {
             props.getProfile();
             props.getMessagesByUser();
+
+            // poll server for token expiration
+            let pollServerInterval = setInterval(function(){
+                props.pollServer();
+            }, 60000);
         })
     };
 
@@ -117,6 +122,7 @@ const mapDispatchToProps = {
     login,
     getProfile,
     getMessagesByUser,
+    pollServer
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignInForm));
