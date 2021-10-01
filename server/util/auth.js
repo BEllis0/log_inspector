@@ -14,6 +14,8 @@ const verifyToken = (req, res, next) => {
         req.user = decoded;
     } catch (err) {
         console.log('Invalid token.');
+        // remove old token
+        res.clearCookie('token');
         return res.status(401).send({message: "Invalid Token", err: err });
     }
 
