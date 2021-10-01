@@ -1,0 +1,11 @@
+@import '../../../styles/variables.scss';
+
+.publicFooterContainer {
+    background-color: $footerColor;
+    width: 100vw;
+    height: auto;
+}
+
+.footerCol {
+    height: 100px;
+}
