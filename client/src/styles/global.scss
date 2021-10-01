@@ -48,6 +48,10 @@ h1, h2, h3, h4, p {
     margin: 0;
 }
 
+h3 {
+    color: $lightBlue;
+}
+
 ul {
     list-style-type: none;
 }
@@ -205,8 +209,8 @@ p, li, input, button {
     margin: 0px 70px;
 }
 
-.col3-container {
-    gap: 10px;
+.col3-container, .col2-container {
+    gap: 40px;
 }
 
 .widgetContainer {
@@ -237,7 +241,7 @@ p, li, input, button {
     padding: 30px 0px;
 }
 
-// Margins
+// Margins/padding
 
 .contentMargin {
     margin: 0 50px;
@@ -251,6 +255,11 @@ p, li, input, button {
     margin-left: 20px;
 }
 
+.margin-lr-50 {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
 .margin-lr-20 {
     margin-left: 20px;
     margin-right: 20px;
@@ -259,6 +268,28 @@ p, li, input, button {
 .margin-lr-10 {
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.margin-tb-20 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.margin-tb-10 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.gap-10 {
+    gap: 10px;
+}
+
+.gap-20 {
+    gap: 20px;
+}
+
+.gap-30 {
+    gap: 30px;
 }
 
 // Dividers
@@ -282,6 +313,24 @@ p, li, input, button {
     font-weight: 500;
 }
 
+.footerHeader {
+    font-size: 26px;
+    color: $orange;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.footerLink {
+    color: $widgetContainer;
+    font-size: 21px;
+    width: fit-content;
+}
+
+.footerCredits {
+    color: $lightBlue;
+    font-size: 16px;
+}
+
 .tabsList {
     padding: 20px
 }
@@ -293,6 +342,16 @@ p, li, input, button {
 
 .tabItem:hover {
     border-bottom: 5px solid $orange;
+}
+
+.linkOrange {
+    color: $orange;
+    text-decoration: underline dotted;
+}
+
+.linkBlue {
+    color: $lightBlue;
+    text-decoration: underline dotted;
 }
 
 // buttons
