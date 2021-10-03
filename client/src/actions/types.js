@@ -29,6 +29,11 @@ export const actions = {
     pageChange: {
         PAGE_CHANGE: 'PAGE_CHANGE'
     },
+    // for setting messages to the snackbar
+    snackbar: {
+        MESSAGE: 'MESSAGE',
+        CLOSE_MESSAGE: 'CLOSE_MESSAGE',
+    },
     //error handling
     error: {
         UPDATE_ERROR: 'UPDATE_ERROR',
