@@ -20,7 +20,15 @@ export function getMessagesByUser() {
             } else {
                 dispatch({
                     type: actions.error.FETCH_MESSAGES_ERROR,
-                    payload: error
+                    payload: error.response.data
+                });
+
+                dispatch({
+                    type: actions.snackbar.MESSAGE,
+                    payload: {
+                        message: error.response.data.message || "Error getting messages",
+                        severity: 'error'
+                    }
                 });
             }
         });

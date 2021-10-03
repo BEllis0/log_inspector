@@ -1,6 +1,9 @@
 import { actions } from './types.js';
 import { AuthPost, AuthGet } from '../util/auth.js';
 
+import { getProfile } from './users.js';
+import { getMessagesByUser } from './messages.js';
+
 export function login(payloadData) {
     return function(dispatch) {
         return AuthPost('/api/v1/login/', payloadData)
@@ -18,16 +21,22 @@ export function login(payloadData) {
                 }
             });
 
-            return Promise.resolve();
+            getProfile();
+            getMessagesByUser();
         })
         .catch(error => {
-            console.log('login error: ', error)
             dispatch({
-                type: actions.error.LOGGIN_ERROR,
-                payload: { message: error, loggedIn: false }
+                type: actions.error.LOGIN_ERROR,
+                payload: { message: error.response.data, loggedIn: false }
             });
 
-            return Promise.reject();
+            dispatch({
+                type: actions.snackbar.MESSAGE,
+                payload: {
+                    message: error.response.data.message,
+                    severity: 'error'
+                }
+            });
         });
     };
 };
@@ -58,19 +67,40 @@ export function logout() {
                 payload: response
             });
 
-            // return Promise.resolve();
+            dispatch({
+                type: actions.snackbar.MESSAGE,
+                payload: {
+                    message: response.data.message || "Successfully logged out.",
+                    severity: 'success'
+                }
+            });
         })
         .catch(error => {
-            console.log('logout error: ', error)
             if (error.response.status === 401 || error.response.status === 403) {
                 dispatch({
                     type: actions.error.TOKEN_ERROR,
                     payload: error
                 });
+
+                dispatch({
+                    type: actions.snackbar.MESSAGE,
+                    payload: {
+                        message: error.response.data.message || "Session ended, please sign in.",
+                        severity: 'error'
+                    }
+                });
             } else {
                 dispatch({
                     type: actions.error.LOGOUT_ERROR,
                     payload: { message: error, loggedIn: false }
+                });
+
+                dispatch({
+                    type: actions.snackbar.MESSAGE,
+                    payload: {
+                        message: error.response.data.message || "Error logging out.",
+                        severity: 'error'
+                    }
                 });
             }
         });

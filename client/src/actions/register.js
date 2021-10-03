@@ -14,11 +14,19 @@ export function register(payloadData) {
                 type: actions.register.REGISTER_USER,
                 payload: response.data
             });
+
+            dispatch({
+                type: actions.snackbar.MESSAGE,
+                payload: {
+                    message: response.data.message || "Account created!",
+                    severity: 'success'
+                }
+            });
         })
         .catch(error => {
             dispatch({
                 type: actions.error.UPDATE_ERROR,
-                payload: { message: error, isLoggedIn: false }
+                payload: { message: error.response.data, isLoggedIn: false }
             });
         });
     };
