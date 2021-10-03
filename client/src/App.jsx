@@ -12,6 +12,7 @@ import AuthRoute from './components/Misc/AuthRoute.jsx';
 import Home from './components/Views/Home/Home.jsx';
 import RegisterOrSignIn from './components/Views/RegisterOrSignIn/RegisterOrSignIn.jsx';
 import Profile from './components/Views/Profile/Profile';
+import DocumentationView from './components/Views/Documentation/Documentation.jsx';
 
 class App extends React.Component {
 
@@ -29,6 +30,7 @@ class App extends React.Component {
 
                 {/* Public Pages */}
                 <Route exact path="/" component={Home} />
+                <Route exact path="/documentation" component={DocumentationView} />
 
                 {/* Sign In and Register */}
                 <Route exact path="/register"  component={RegisterOrSignIn} />
