@@ -5,6 +5,7 @@ import styles from './Profile.module.scss';
 
 import { connect } from 'react-redux'; // connect to store
 import { updateUserSettings } from '../../../actions/users.js';
+import { copyApiKey } from '../../../actions/userInteractions.js';
 
 import AuthNav from '../../Nav/AuthNav/AuthNav.jsx';
 import SecondaryNav from '../../Nav/Secondary/SecondaryNav.jsx';
@@ -51,7 +52,8 @@ const ProfileView = (props) => {
 
     const handleCopyKey = e => {
         const key = document.querySelector('#clientApiKey').innerHTML;
-        window.navigator.clipboard.writeText(key);  
+        window.navigator.clipboard.writeText(key);
+        props.copyApiKey();
     };
 
     if (loggedIn === false) {
@@ -173,12 +175,14 @@ const ProfileView = (props) => {
 };
 
 const mapStateToProps = state => ({
+    loginMessage: state.login.message,
     loggedIn: state.login.loggedIn,
     user: state.user.profile
 });
 
 const mapDispatchToProps = {
-    updateUserSettings
+    updateUserSettings,
+    copyApiKey
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProfileView));
