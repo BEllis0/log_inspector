@@ -22,24 +22,17 @@ import Copyright from '../../Misc/Copyright.jsx';
 
 const SignInForm = props => {
 
+    const { loggedIn, login, getProfile, getMessagesByUser, pollServer } = props;
+
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
 
     const handleSubmit = e => {
         e.preventDefault();
-        props.login({
+        login({
             email: email,
             password: password
-        })
-        .then(() => {
-            props.getProfile();
-            props.getMessagesByUser();
-
-            // poll server for token expiration
-            let pollServerInterval = setInterval(function(){
-                props.pollServer();
-            }, 60000);
-        })
+        });
     };
 
     return (
@@ -115,7 +108,7 @@ const SignInForm = props => {
 }
 
 const mapStateToProps = state => ({
-    
+    loggedIn: state.login.loggedIn
 });
 
 const mapDispatchToProps = {
