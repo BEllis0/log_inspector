@@ -35,13 +35,13 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 loggedIn: false,
-                error: action.payload.message
+                error: action.payload
             }
         case actions.error.LOGOUT_ERROR:
             return {
                 ...state,
                 loggedIn: false,
-                error: action.payload.message
+                error: action.payload
             }
         default:
             return state;

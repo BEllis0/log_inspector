@@ -1,7 +1,6 @@
 import { actions } from '../actions/types.js';
 
 const initialState = {
-    loggedIn: false,
     error: null
 };
 
