@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter, BrowserHistory } from 'react-router';
+import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import styles from './Home.module.scss';
 
@@ -153,8 +153,4 @@ const mapStateToProps = state => ({
     loggedIn: state.login.loggedIn
 });
 
-const mapDispatchToProps = {
-    // loginCheck,
-};
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));
+export default withRouter(connect(mapStateToProps, null)(Home));
