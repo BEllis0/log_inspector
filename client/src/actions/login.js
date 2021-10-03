@@ -10,6 +10,14 @@ export function login(payloadData) {
                 payload: response.data
             });
 
+            dispatch({
+                type: actions.snackbar.MESSAGE,
+                payload: {
+                    message: response.data.message,
+                    severity: 'success'
+                }
+            });
+
             return Promise.resolve();
         })
         .catch(error => {
@@ -18,6 +26,8 @@ export function login(payloadData) {
                 type: actions.error.LOGGIN_ERROR,
                 payload: { message: error, loggedIn: false }
             });
+
+            return Promise.reject();
         });
     };
 };
