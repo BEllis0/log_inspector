@@ -12,6 +12,7 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 loggedIn: true,
+                message: action.payload.message,
                 error: null
             }
         // logout
