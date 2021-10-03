@@ -8,6 +8,7 @@ import { withRouter } from 'react-router';
 
 // redux
 import { connect } from 'react-redux'; // connect to store
+import { closeMessage } from '../../../actions/snackbar.js';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -16,30 +17,37 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 const SnackbarAlerts = (props) => {
 
     console.log('snackbar props', props)
+    const { message, severity, closeMessage } = props;
   
-    const [open, setOpen] = React.useState(false);
+    // const [open, setOpen] = React.useState(false);
+    // 
+    const open = Boolean(message);
+    const setSeverity = Boolean(severity)
 
     const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setOpen(false);
+        // if (reason === 'clickaway') {
+        //     return;
+        // }
+        // setOpen(false);
+        closeMessage();
     };
 
   return (
-    <Stack spacing={2} sx={{ width: '100%' }}>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity={props.severity} sx={{ width: '100%' }}>
-          {props.message}
+        <Alert onClose={handleClose} severity={setSeverity ? severity : 'success'} sx={{ width: '100%' }}>
+          {open ? message : ""}
         </Alert>
       </Snackbar>
-    </Stack>
   );
 };
 
 const mapStateToProps = state => ({
-    loginErrorMessage: state.login,
-
+    message: state.snackbar.message,
+    severity: state.snackbar.severity
 });
 
-export default withRouter(connect(mapStateToProps, null)(SnackbarAlerts));
+const mapDispatchToProps = {
+    closeMessage
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SnackbarAlerts));
