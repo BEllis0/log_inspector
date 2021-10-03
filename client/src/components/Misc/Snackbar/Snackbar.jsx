@@ -15,30 +15,27 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 const SnackbarAlerts = (props) => {
-
-    console.log('snackbar props', props)
     const { message, severity, closeMessage } = props;
   
-    // const [open, setOpen] = React.useState(false);
-    // 
     const open = Boolean(message);
     const setSeverity = Boolean(severity)
 
     const handleClose = (event, reason) => {
-        // if (reason === 'clickaway') {
-        //     return;
-        // }
-        // setOpen(false);
         closeMessage();
     };
 
-  return (
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity={setSeverity ? severity : 'success'} sx={{ width: '100%' }}>
-          {open ? message : ""}
-        </Alert>
-      </Snackbar>
-  );
+    const customSuccessStyle = {
+        backgroundColor: '#00798C',
+        color: 'white'
+    };
+
+    return (
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert style={severity === 'success' ? customSuccessStyle : {}} onClose={handleClose} severity={setSeverity ? severity : 'success'} sx={{ width: '100%' }}>
+                {open ? message : ""}
+            </Alert>
+        </Snackbar>
+    );
 };
 
 const mapStateToProps = state => ({
