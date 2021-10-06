@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter, Redirect } from 'react-router';
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 // redux
 import { connect } from 'react-redux'; // connect to store
 import styles from './styles/global.scss';
@@ -13,6 +13,7 @@ import Home from './components/Views/Home/Home.jsx';
 import RegisterOrSignIn from './components/Views/RegisterOrSignIn/RegisterOrSignIn.jsx';
 import Profile from './components/Views/Profile/Profile';
 import DocumentationView from './components/Views/Documentation/Documentation.jsx';
+import NoMatchView from './components/Views/NoMatch/NoMatch.jsx';
 
 class App extends React.Component {
 
@@ -26,8 +27,7 @@ class App extends React.Component {
     
     render() {
         return (
-            <div>
-
+            <Switch>
                 {/* Public Pages */}
                 <Route exact path="/" component={Home} />
                 <Route exact path="/documentation" component={DocumentationView} />
@@ -49,10 +49,14 @@ class App extends React.Component {
                 <AuthRoute exact path='/profile' type="private">
                     <Redirect to="/account/profile" />
                 </AuthRoute>
+
+                <Route path="*">
+                    <NoMatchView />
+                </Route>
                 
                 
                 {/* <Route path="/error" component={ErrorPage} /> */}
-            </div>
+            </Switch>
         )
     }
 };
