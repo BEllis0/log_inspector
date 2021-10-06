@@ -1,0 +1,15 @@
+@import '../../../styles/variables.scss';
+
+#documentationMenu > *, #documentationDisplay > * {
+    margin: 20px 0;
+}
+
+#viewBackground {
+    background-color: $widgetContainer;
+    overflow: hidden !important;
+}
+
+.markdownBox {
+    padding: 10px;
+    background-color: $widgetContainer;
+}
