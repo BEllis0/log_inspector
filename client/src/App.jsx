@@ -14,6 +14,7 @@ import RegisterOrSignIn from './components/Views/RegisterOrSignIn/RegisterOrSign
 import Profile from './components/Views/Profile/Profile';
 import DocumentationView from './components/Views/Documentation/Documentation.jsx';
 import NoMatchView from './components/Views/NoMatch/NoMatch.jsx';
+import ErrorBoundary from './components/Views/ErrorBoundary/ErrorBoundary.jsx';
 
 class App extends React.Component {
 
@@ -24,39 +25,45 @@ class App extends React.Component {
             this.props.getMessagesByUser();
         }
     }
+
+    static getDerivedStateFromError(error) {
+        console.log('Error from error lifecycle funnctionn:', error)
+      }
     
     render() {
         return (
-            <Switch>
-                {/* Public Pages */}
-                <Route exact path="/" component={Home} />
-                <Route exact path="/documentation" component={DocumentationView} />
+            <ErrorBoundary>
+                <Switch>
+                    {/* Public Pages */}
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/documentation" component={DocumentationView} />
 
-                {/* Sign In and Register */}
-                <Route exact path="/register"  component={RegisterOrSignIn} />
-                <AuthRoute exact path="/sign-in" component={RegisterOrSignIn} type="guest">
-                    {this.props.loggedIn ? <Redirect to="/account/profile" /> : <RegisterOrSignIn /> }
-                </AuthRoute>
-                
-                {/* Account Related */}
-                <AuthRoute exact path="/account/profile" type="private">
-                    <Profile />
-                </AuthRoute>
-                <AuthRoute exact path="/account/groups" component={Profile} type="private" />
-                <AuthRoute exact path="/account/domain-whitelist" component={Profile} type="private" />
+                    {/* Sign In and Register */}
+                    <Route exact path="/register"  component={RegisterOrSignIn} />
+                    <AuthRoute exact path="/sign-in" component={RegisterOrSignIn} type="guest">
+                        {this.props.loggedIn ? <Redirect to="/account/profile" /> : <RegisterOrSignIn /> }
+                    </AuthRoute>
+                    
+                    {/* Account Related */}
+                    <AuthRoute exact path="/account/profile" type="private">
+                        <Profile />
+                    </AuthRoute>
+                    <AuthRoute exact path="/account/groups" component={Profile} type="private" />
+                    <AuthRoute exact path="/account/domain-whitelist" component={Profile} type="private" />
 
-                {/* Edge Case Routes - handle incorrect pathing */}
-                <AuthRoute exact path='/profile' type="private">
-                    <Redirect to="/account/profile" />
-                </AuthRoute>
+                    {/* Edge Case Routes - handle incorrect pathing */}
+                    <AuthRoute exact path='/profile' type="private">
+                        <Redirect to="/account/profile" />
+                    </AuthRoute>
 
-                <Route path="*">
-                    <NoMatchView />
-                </Route>
-                
-                
-                {/* <Route path="/error" component={ErrorPage} /> */}
-            </Switch>
+                    <Route path="*">
+                        <NoMatchView />
+                    </Route>
+                    
+                    
+                    {/* <Route path="/error" component={ErrorPage} /> */}
+                </Switch>
+            </ErrorBoundary>
         )
     }
 };
