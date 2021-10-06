@@ -306,6 +306,12 @@ p, li, input, button {
     border-radius: 10px;
 }
 
+.divider-thin {
+    width: 100%;
+    background-color: $darkBlue;
+    height: 1px;
+}
+
 // Navigation-related
 
 .navLink {
