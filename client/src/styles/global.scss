@@ -46,6 +46,7 @@ body {
 
 h1, h2, h3, h4, p {
     margin: 0;
+    overflow-wrap: break-word;
 }
 
 h3 {
@@ -406,7 +407,7 @@ p, li, input, button {
 @media (max-width: #{$mobile-width}) {
     
     .container {
-        margin: 0 20px;
+        margin: 0 30px;
     }
     
     .w3, .w4, .w6, .fb3, .fb4, .fb6, .fb8 {
@@ -416,5 +417,7 @@ p, li, input, button {
 
     .flex {
         flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
     }
 }
