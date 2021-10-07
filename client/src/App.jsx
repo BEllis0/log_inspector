@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { withRouter, Redirect } from 'react-router';
 import { Route, Switch } from "react-router-dom";
 // redux
@@ -9,10 +9,10 @@ import { getMessagesByUser } from './actions/messages.js';
 
 // components
 import AuthRoute from './components/Misc/AuthRoute.jsx';
-import Home from './components/Views/Home/Home.jsx';
-import RegisterOrSignIn from './components/Views/RegisterOrSignIn/RegisterOrSignIn.jsx';
-import Profile from './components/Views/Profile/Profile';
-import DocumentationView from './components/Views/Documentation/Documentation.jsx';
+const Home = lazy(() => import('./components/Views/Home/Home.jsx'));
+const RegisterOrSignIn = lazy(() => import('./components/Views/RegisterOrSignIn/RegisterOrSignIn.jsx'));
+const Profile = lazy(() => import('./components/Views/Profile/Profile'));
+const DocumentationView = lazy(() => import('./components/Views/Documentation/Documentation.jsx'));
 import NoMatchView from './components/Views/NoMatch/NoMatch.jsx';
 import ErrorBoundary from './components/Views/ErrorBoundary/ErrorBoundary.jsx';
 
@@ -33,6 +33,7 @@ class App extends React.Component {
     render() {
         return (
             <ErrorBoundary>
+                <Suspense fallback={<div>Loading...</div>}>
                 <Switch>
                     {/* Public Pages */}
                     <Route exact path="/" component={Home} />
@@ -63,6 +64,7 @@ class App extends React.Component {
                     
                     {/* <Route path="/error" component={ErrorPage} /> */}
                 </Switch>
+                </Suspense>
             </ErrorBoundary>
         )
     }
