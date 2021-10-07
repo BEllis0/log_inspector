@@ -396,9 +396,25 @@ p, li, input, button {
     color: $orange;
 }
 
-@include mobile {
-    .w3, .w4, .w6, .fb3, .fb4, .fb6 {
+// @include mobile {
+//     .w3, .w4, .w6, .fb3, .fb4, .fb6 {
+//         width: 100%;
+//         flex-basis: 100%;
+//     }
+// }
+
+@media (max-width: #{$mobile-width}) {
+    
+    .container {
+        margin: 0 20px;
+    }
+    
+    .w3, .w4, .w6, .fb3, .fb4, .fb6, .fb8 {
         width: 100%;
         flex-basis: 100%;
+    }
+
+    .flex {
+        flex-wrap: wrap;
     }
 }

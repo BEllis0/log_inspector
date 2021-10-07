@@ -55,7 +55,7 @@ const Home = props => {
                     <div className="bladeHeader">
                         <h1 className="heading">Key Features</h1>
                     </div>
-                    <div className="flex col3-container">
+                    <div className="flex col3-container wrap">
                         <div className="fb4">
                             <img src={dataVizImg} className={styles.blurbImg} />
                             <h2>Realtime Data</h2>
