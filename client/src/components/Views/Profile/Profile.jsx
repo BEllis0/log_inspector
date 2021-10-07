@@ -36,7 +36,6 @@ const ProfileView = (props) => {
             }
             // if anything changed, run action
             if (Object.keys(payload).length > 0) {
-                console.log('running action')
                 props.updateUserSettings(payload);
             }
         }

@@ -195,7 +195,6 @@ export function deleteDomain(domainName) {
 };
 
 export function updateUserSettings(userSettings) {
-    console.log('user setting changed', userSettings)
     return function(dispatch) {
         AuthPatch('/api/v1/users/update/user-settings', userSettings)
         .then(response => {
