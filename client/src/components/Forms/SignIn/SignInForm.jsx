@@ -22,7 +22,7 @@ import Copyright from '../../Misc/Copyright.jsx';
 
 const SignInForm = props => {
 
-    const { loggedIn, login, getProfile, getMessagesByUser, pollServer } = props;
+    const { login, getProfile, getMessagesByUser, pollServer } = props;
 
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -32,6 +32,17 @@ const SignInForm = props => {
         login({
             email: email,
             password: password
+        })
+        .then(response => {
+            getProfile();
+            getMessagesByUser();
+
+            window.interval = window.interval || setInterval(() => {
+                pollServer();
+            }, 60000);
+        })
+        .catch(err => {
+            console.log('Error logging in user', err);
         });
     };
 
