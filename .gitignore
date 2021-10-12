@@ -36,3 +36,4 @@ client/public/bundle.js
 build/
 # public/
 public/bundle.js
+**/*bundle.js*
