@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './HomeHero.module.scss';
 import HeroImage from '../../../assets/Log_Inspector_Home_Hero.png';
+import {Link} from 'react-router-dom';
 
 const HomeHero = props => {
     return (
@@ -10,7 +11,7 @@ const HomeHero = props => {
                 <br />
                 <h3 className="subHeading">Log Inspector is a hub for monitoring errors in your application and supports the debugging process.</h3>
                 <br />
-                <div className="primaryCTA">Register for free</div>
+                <div className="primaryCTA"><Link to="/register">Register for free</Link></div>
             </div>
         </div>
     )
