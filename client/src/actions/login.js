@@ -23,6 +23,7 @@ export function login(payloadData) {
 
             getProfile();
             getMessagesByUser();
+            return Promise.resolve();
         })
         .catch(error => {
             dispatch({
@@ -37,6 +38,8 @@ export function login(payloadData) {
                     severity: 'error'
                 }
             });
+
+            return Promise.reject();
         });
     };
 };
@@ -46,14 +49,23 @@ export function pollServer() {
         return AuthGet('/api/v1/refresh/poll/token')
         .then(response => {
             console.log('Successfully pinged server.', response);
-            return Promise.resolve();
+            // return Promise.resolve();
         })
         .catch(error => {
-            console.log('token poll error: ', error)
+            console.log('token poll error: ', error);
             dispatch({
                 type: actions.error.TOKEN_ERROR,
                 payload: error
             });
+
+            dispatch({
+                type: actions.snackbar.MESSAGE,
+                payload: {
+                    message: error.response.data.message || "Session ended, please sign in.",
+                    severity: 'error'
+                }
+            });
+            // return Promise.reject();
         });
     };
 };
