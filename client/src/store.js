@@ -2,7 +2,8 @@ import  { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import throttle from 'lodash.throttle';
-// import {parse, stringify} from 'flatted';
+
+import {pollServerMiddleware} from './util/pollServerMiddleware.js';
 
 // const initialState = {};
 
@@ -55,7 +56,7 @@ if (window.__REDUX_DEVTOOLS_EXTENSION__ !== undefined) {
     rootReducer,
     persistedState,
     compose(
-    applyMiddleware(...middleware),
+    applyMiddleware(...middleware, pollServerMiddleware),
     //dev tools extension set up; remove on production env
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )
@@ -66,7 +67,7 @@ if (window.__REDUX_DEVTOOLS_EXTENSION__ !== undefined) {
       rootReducer,
       persistedState,
       compose(
-      applyMiddleware(...middleware)
+      applyMiddleware(...middleware, pollServerMiddleware)
       )
   );
 }
