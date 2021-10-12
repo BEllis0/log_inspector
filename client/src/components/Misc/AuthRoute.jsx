@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 // redux
 import { connect } from 'react-redux'; // connect to store
 
-const AuthRoute = ({component: Component, ...rest}) => {
+const AuthRoute = ({children, ...rest}) => {
   /*
     Route logic:
     -If route is a 'guest' page (login, register) and user is NOT logged in
@@ -16,15 +16,16 @@ const AuthRoute = ({component: Component, ...rest}) => {
     -If route is a 'guest' page (login, register) and user is NOT logged in
       -Redirect to sign in page
   */
+  
   return (
     <Route
       {...rest}
-      render={(props) => 
-        props.type === "guest" && props.loggedIn === false ? <Component {...props} />
-        : props.type === "guest" && props.loggedIn === true ? <Redirect to={{pathname: 'account/profile', state: {from: props.location}}} />
-        : props.type === "private" && props.loggedIn === true ? <Component {...props} />
-        : <Redirect to={{pathname: '/sign-in', state: {from: props.location}}} />
-      }
+      render={(props) => {
+        return rest.type === "guest" && rest.loggedIn === false ? children
+        : rest.type === "guest" && rest.loggedIn === true ? <Redirect to={{pathname: 'account/profile', state: {from: rest.location}}} />
+        : rest.type === "private" && rest.loggedIn === true ? children
+        : <Redirect to={{pathname: '/sign-in', state: {from: rest.location}}} />
+      }}
     />
   )
 };
