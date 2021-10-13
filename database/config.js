@@ -4,7 +4,7 @@ require('dotenv').config();
 // set the connection options, which will be applied to all connections
 // depreciated after mongoose v5.13.8
 mongoose.set('useNewUrlParser', true);
-mongoose.set('useFindAndModify', false);
+mongoose.set('useFindAndModify', true);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
