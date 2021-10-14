@@ -57,7 +57,7 @@ class App extends React.Component {
                             <DashboardView />
                         </AuthRoute>
 
-                        <AuthRoute exact path="/dashboard/messages-list" type="private">
+                        <AuthRoute exact path="/dashboard/messages/list" type="private">
                             <MessagesListView />
                         </AuthRoute>
                         
