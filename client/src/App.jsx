@@ -17,6 +17,7 @@ const DocumentationView = lazy(() => import('./components/Views/Documentation/Do
 import NoMatchView from './components/Views/NoMatch/NoMatch.jsx';
 import ErrorBoundary from './components/Views/ErrorBoundary/ErrorBoundary.jsx';
 import DashboardView from './components/Views/Dashboard/DashboardView.jsx';
+import MessagesListView from './components/Views/MessagesList/MessagesListView.jsx';
 
 class App extends React.Component {
 
@@ -54,6 +55,10 @@ class App extends React.Component {
                         {/* Data Viz Related */}
                         <AuthRoute exact path="/dashboard" type="private">
                             <DashboardView />
+                        </AuthRoute>
+
+                        <AuthRoute exact path="/dashboard/messages-list" type="private">
+                            <MessagesListView />
                         </AuthRoute>
                         
                         {/* Account Related */}
