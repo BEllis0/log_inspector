@@ -3,6 +3,8 @@ import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import styles from './DashboardView.module.scss';
 
+import dashboardSecondaryNavLinks from '../../../util/DashboardSecondaryNav.js';
+
 // redux
 import { connect } from 'react-redux'; // connect to store
 
@@ -22,12 +24,12 @@ const DashboardView = props => {
     return (
         <>
             <AuthNav /> 
-            <SecondaryNav />
+            <SecondaryNav navOptions={dashboardSecondaryNavLinks} />
             
             <div id={styles.viewBackground}>
                 <div className="container">
-                    <h1>Dashboard</h1>
-                    <DataSelectTable tableData={messages} tableHeader={tableHeader} />
+                    
+                    {/* <DataSelectTable tableData={messages} tableHeader={tableHeader} /> */}
                 </div>
             </div>
 
