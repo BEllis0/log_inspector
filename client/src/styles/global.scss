@@ -163,6 +163,12 @@ p, li, input, button {
     text-align: center;
 }
 
+// height helpers
+
+.height100 {
+    height: 100%;
+}
+
 // width helpers
 
 .w3 {
@@ -249,7 +255,7 @@ p, li, input, button {
 // Margins/padding
 
 .contentMargin {
-    margin: 0 50px;
+    margin: 0 70px;
 }
 
 .margin-r-20 {
