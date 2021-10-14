@@ -7,6 +7,15 @@ module.exports = {
             new: (req, res) => {
                 messageValidation(req.get('apiKey'), req.hostname)
                     .then(validatedPerson => {
+
+                        const convertMessagesToArr = () => {
+                            let messageArr = [];
+                            for(let message in req.body.message) {
+                                messageArr.push(req.body.message[message]);
+                            }
+                            return messageArr;
+                        }
+
                         const messagePayload = {
                             siteName: req.body.siteName || null,
                             environment: req.body.environment || null,
@@ -14,7 +23,8 @@ module.exports = {
                             domain: req.hostname,
                             ownerId: validatedPerson.personId || undefined, // returned from validation process
                             page: req.protocol + "://" + req.hostname + req.originalUrl || null,
-                            message: req.body.message || null,
+                            message: convertMessagesToArr() || null,
+                            type: req.body.type || null,
                             priorityLevel: req.body.priorityLevel || null,
                             severity: req.body.severity || null,
                             status: req.body.status || null,
