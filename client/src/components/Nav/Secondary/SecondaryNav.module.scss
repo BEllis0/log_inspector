@@ -4,4 +4,8 @@
     width: 100%;
     background-color: $darkBlue;
     min-height: 75px;
+    display: flex;
+    align-items: center;
+    // justify-content: space-between;
+    color: $widgetContainer;
 }
