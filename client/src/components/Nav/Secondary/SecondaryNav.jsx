@@ -33,9 +33,15 @@ const SecondaryNav = props => {
                 
                 {/* Dynamic Nav Buttons */}
                 <div className="flex gap-20">
-                    {navOptions && navOptions.map(({href, text, color}, i) => {
+                    {navOptions && navOptions.map(({href, text, color, api}, i) => {
                         return (
-                            <HollowButton key={i} href={href} text={text} color={color} />
+                            <HollowButton 
+                                key={i} 
+                                href={href} 
+                                text={text} 
+                                color={color} 
+                                api={api} 
+                            />
                         )
                     })}
                 </div>
