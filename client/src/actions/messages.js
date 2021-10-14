@@ -5,7 +5,6 @@ export function getMessagesByUser() {
     return function(dispatch) {
         AuthGet('/api/v1/messages/all')
         .then(response => {
-            console.log('get messages response: ', response)
             dispatch({
                 type: actions.user.FETCH_DATA_BY_USER,
                 payload: response.data
@@ -30,6 +29,19 @@ export function getMessagesByUser() {
                         severity: 'error'
                     }
                 });
+            }
+        });
+    };
+};
+
+// dispatch snackbar message that messages were updated
+export function updatedMessages() {
+    return function(dispatch) {
+        dispatch({
+            type: actions.snackbar.MESSAGE,
+            payload: {
+                message: "Refreshed Messages.",
+                severity: 'success'
             }
         });
     };
