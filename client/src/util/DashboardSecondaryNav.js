@@ -7,5 +7,6 @@
 */
 
 export default [
-    {href: '/dashboard/messages-list', text: 'Message List', color: 'white'},
+    { href: '/dashboard/messages/list', text: 'Message List', color: 'white' },
+    { href: '/api/v1/messages/all', text: 'Refresh', color: 'white', api: true },
 ];
