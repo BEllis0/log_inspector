@@ -10,6 +10,7 @@ import { connect } from 'react-redux'; // connect to store
 import AuthNav from '../../Nav/AuthNav/AuthNav.jsx';
 import SecondaryNav from '../../Nav/Secondary/SecondaryNav';
 import DataSelectTable from '../../Data Viz/DataSelectTable/DataSelectTable.jsx';
+import SnackbarAlerts from '../../Misc/Snackbar/Snackbar.jsx';
 
 const MessagesListView = props => {
     const { messages } = props;
@@ -32,6 +33,7 @@ const MessagesListView = props => {
                 </div>
             </div>
 
+            <SnackbarAlerts />
         </>
     )
 };
