@@ -16,15 +16,10 @@ import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
-
-// const rows = [
-
-// ];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -56,18 +51,8 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-let headCells = [
-//   {
-//     id: 'name',
-//     numeric: false,
-//     disablePadding: true,
-//     label: 'Dessert (100g serving)',
-//   },
-];
-
 function EnhancedTableHead(props) {
-  const { headCells, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
-    props;
+  const { headCells, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -151,16 +136,23 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          Nutrition
+          Log Messages List
         </Typography>
       )}
 
       {numSelected > 0 ? (
+        <div className="flex">
+        <Tooltip title="Edit">
+          <IconButton>
+            <EditIcon />
+          </IconButton>
+        </Tooltip>
         <Tooltip title="Delete">
           <IconButton>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
+        </div>
       ) : (
         <Tooltip title="Filter list">
           <IconButton>
@@ -196,19 +188,20 @@ export default function DataSelectTable(props) {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name);
+      const newSelecteds = rows.map((n, i) => i);
+      console.log('all selected: ', newSelecteds)
       setSelected(newSelecteds);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (event, index) => {
+    const selectedIndex = selected.indexOf(index);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected, index);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -221,6 +214,7 @@ export default function DataSelectTable(props) {
     }
 
     setSelected(newSelected);
+    console.log('handling click', newSelected)
   };
 
   const handleChangePage = (event, newPage) => {
@@ -237,7 +231,7 @@ export default function DataSelectTable(props) {
     return ( (typeof val === 'function') || (typeof val === 'object') );
   }
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
+  const isSelected = (index) => selected.indexOf(index) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -268,13 +262,19 @@ export default function DataSelectTable(props) {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row._id);
-                  const labelId = `enhanced-table-checkbox-${index}`;
-                  
+                    const isItemSelected = isSelected(index);
+                    const labelId = `enhanced-table-checkbox-${index}`;
+
+                    const styles = {
+                        backgroundColor: row.type === "error" ? 'rgba(208, 0, 0, 0.5)' :
+                        row.type === "warn" ? '#EDAE49' : ''
+                    }
+
                       return (
                         <TableRow
+                          style={styles}
                           hover
-                        //   onClick={(event) => handleClick(event, row.name)}
+                          onClick={(event) => handleClick(event, index)}
                           role="checkbox"
                           aria-checked={isItemSelected}
                           tabIndex={-1}
@@ -291,16 +291,22 @@ export default function DataSelectTable(props) {
                             />
                         </TableCell>
                         {tableHeader.map((col, i) => {
-                            if (col === "message") { console.log(row[col])}
                             return (
                                 <TableCell
                                     key={col}
-                                    // component="th"
-                                    // id={labelId}
+                                    component="th"
+                                    id={labelId}
                                     scope="row"
-                                    padding="none"
+                                    padding="normal"
                                 >
-                                    {isObject(row[col]) ? 'is an obj' : row[col] === null ? 'null' : row[col]}
+                                    {/* Cell value - error handling for null, display handling for message array */}
+                                    {
+                                        Array.isArray(row[col]) ? 
+                                        row[col].join(', ') : 
+                                        row[col] === null ? 
+                                        'null' : 
+                                        row[col]
+                                    }
                                 </TableCell>
                             )
                         })}
