@@ -13,6 +13,7 @@
     "start": "node server/server.js",
     "build:dev": "webpack --mode development --watch",
     "build": "yarn install",
+    "deleteMessages": "node ./server/util/deleteAllMessages.js",
     "lint": "eslint ./"
   },
   "dependencies": {
