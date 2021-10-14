@@ -8,9 +8,8 @@ const messageSchema = new Schema({
     channel: String,
     domain: String, // parsed from the api request. Used for CORs security. Only allow whitelisted domains in the users' domain list
     page: String,  // either received in req body or parsed from req headers
-    message: {
-        type: Map, // may need to change. current message format: { type: {type: String}, message: Array }
-    },
+    message: Array,
+    type: String,
     priorityLevel: String,
     severity: String,
     status: String,
