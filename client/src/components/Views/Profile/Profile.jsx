@@ -3,6 +3,8 @@ import { withRouter } from 'react-router';
 import { Redirect } from "react-router-dom";
 import styles from './Profile.module.scss';
 
+import profileSecondaryNavLinks from '../../../util/profileSecondaryNavLinks.js';
+
 import { connect } from 'react-redux'; // connect to store
 import { updateUserSettings } from '../../../actions/users.js';
 import { copyApiKey } from '../../../actions/userInteractions.js';
@@ -66,7 +68,7 @@ const ProfileView = (props) => {
         
         {/* Navs */}
         <AuthNav />
-        <SecondaryNav />
+        <SecondaryNav navOptions={profileSecondaryNavLinks} />
         
         {/* Page Body */}
         <div className="container">
