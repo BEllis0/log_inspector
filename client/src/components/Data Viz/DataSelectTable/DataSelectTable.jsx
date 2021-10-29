@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -20,6 +21,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
+
+import Skeleton from '@mui/material/Skeleton';
+
+import { connect } from 'react-redux'; // connect to store
+import { getMessagesByUser, deleteMessages } from '../../../actions/messages.js';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -79,12 +85,12 @@ function EnhancedTableHead(props) {
             sortDirection={orderBy === headCell ? order : false}
           >
             <TableSortLabel
-              active={orderBy === i}
-              direction={orderBy === i ? order : 'asc'}
-              onClick={createSortHandler(i)}
+              active={orderBy === headCell}
+              direction={orderBy === headCell ? order : 'asc'}
+              onClick={createSortHandler(headCell)}
             >
               {headCell ? headCell : null}
-              {orderBy === i ? (
+              {orderBy === headCell ? (
                 <Box component="span" sx={visuallyHidden}>
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
                 </Box>
@@ -107,7 +113,12 @@ EnhancedTableHead.propTypes = {
 };
 
 const EnhancedTableToolbar = (props) => {
-  const { numSelected } = props;
+  const { numSelected, selectedArr, deleteMessages, getMessagesByUser, tableData } = props;
+
+  const handleDelete = async (e) => {
+      await deleteMessages(selectedArr);
+      await getMessagesByUser();
+  };
 
   return (
     <Toolbar
@@ -142,13 +153,17 @@ const EnhancedTableToolbar = (props) => {
 
       {numSelected > 0 ? (
         <div className="flex">
+        
+        {numSelected < 2 && 
         <Tooltip title="Edit">
           <IconButton>
             <EditIcon />
           </IconButton>
         </Tooltip>
+        }
+
         <Tooltip title="Delete">
-          <IconButton>
+          <IconButton onClick={handleDelete}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
@@ -168,9 +183,9 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function DataSelectTable(props) {
+const DataSelectTable = (props) => {
 
-  const { tableHeader, tableData } = props;
+  const { tableHeader, tableData, loading, deleteMessages, getMessagesByUser } = props;
 
   const rows = tableData || [];
 
@@ -188,8 +203,7 @@ export default function DataSelectTable(props) {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n, i) => i);
-      console.log('all selected: ', newSelecteds)
+      const newSelecteds = rows.map((n, i) => n._id);
       setSelected(newSelecteds);
       return;
     }
@@ -214,7 +228,6 @@ export default function DataSelectTable(props) {
     }
 
     setSelected(newSelected);
-    console.log('handling click', newSelected)
   };
 
   const handleChangePage = (event, newPage) => {
@@ -226,43 +239,67 @@ export default function DataSelectTable(props) {
     setPage(0);
   };
 
-  const isObject = (val) => {
-    if (val === null) { return false;}
-    return ( (typeof val === 'function') || (typeof val === 'object') );
-  }
+  const skeletonStyles = {
+      width: '100%',
+      justifyContent: 'center',
+      padding: '10px',
+      height: '20px'
+  };
 
   const isSelected = (index) => selected.indexOf(index) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-
+  
   return (
     <Box sx={{ width: '100%', }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar 
+            numSelected={selected.length}
+            selectedArr={selected}
+            deleteMessages={deleteMessages}
+            getMessagesByUser={getMessagesByUser}
+            tableData={tableData}
+        />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
             size='medium'
           >
-            <EnhancedTableHead
-              headCells={tableHeader || []}
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
-            <TableBody sx={{ height: '100%' }}>
+            {loading ? 
+                <></> : 
+                <EnhancedTableHead
+                headCells={tableHeader || []}
+                numSelected={selected.length}
+                order={order}
+                orderBy={orderBy}
+                onSelectAllClick={handleSelectAllClick}
+                onRequestSort={handleRequestSort}
+                rowCount={rows.length}
+                />
+            }
+            {loading ?
+            <TableBody>
+                {Array.from(Array(15)).map((item, i) => {
+                    return (
+                        <TableRow key={i}>
+                            <TableCell>
+                                <Skeleton variant="text" style={skeletonStyles} />
+                                
+                            </TableCell>
+                        </TableRow>
+                    )
+                })}
+            </TableBody> 
+            : <TableBody sx={{ height: '100%' }}>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.slice().sort(getComparator(order, orderBy)) */}
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                    const isItemSelected = isSelected(index);
+                    const isItemSelected = isSelected(row._id);
                     const labelId = `enhanced-table-checkbox-${index}`;
 
                     const styles = {
@@ -274,7 +311,7 @@ export default function DataSelectTable(props) {
                         <TableRow
                           style={styles}
                           hover
-                          onClick={(event) => handleClick(event, index)}
+                          onClick={(event) => handleClick(event, row._id)}
                           role="checkbox"
                           aria-checked={isItemSelected}
                           tabIndex={-1}
@@ -310,12 +347,6 @@ export default function DataSelectTable(props) {
                                 </TableCell>
                             )
                         })}
-                          
-                          
-                          {/* <TableCell align="right">{row.calories}</TableCell>
-                          <TableCell align="right">{row.fat}</TableCell>
-                          <TableCell align="right">{row.carbs}</TableCell>
-                          <TableCell align="right">{row.protein}</TableCell> */}
                         </TableRow>
                       );
                   
@@ -331,6 +362,7 @@ export default function DataSelectTable(props) {
                 </TableRow>
               )}
             </TableBody>
+            }
           </Table>
         </TableContainer>
         <TablePagination
@@ -346,6 +378,17 @@ export default function DataSelectTable(props) {
     </Box>
   );
 };
+
+const mapStateToProps = state => ({
+    loading: state.loading.loading
+});
+
+const mapDispachToProps = {
+    deleteMessages,
+    getMessagesByUser
+};
+
+export default withRouter(connect(mapStateToProps, mapDispachToProps)(DataSelectTable));
 
 DataSelectTable.propTypes = {
     tableHeader: PropTypes.arrayOf(PropTypes.string),
