@@ -18,6 +18,7 @@ import NoMatchView from './components/Views/NoMatch/NoMatch.jsx';
 import ErrorBoundary from './components/Views/ErrorBoundary/ErrorBoundary.jsx';
 import DashboardView from './components/Views/Dashboard/DashboardView.jsx';
 import MessagesListView from './components/Views/MessagesList/MessagesListView.jsx';
+const MessageView = lazy(() => import ('./components/Views/Message/MessageView.jsx'));
 
 class App extends React.Component {
 
@@ -59,6 +60,10 @@ class App extends React.Component {
 
                         <AuthRoute exact path="/dashboard/messages/list" type="private">
                             <MessagesListView />
+                        </AuthRoute>
+
+                        <AuthRoute path="/dashboard/messages/*" type="private">
+                            <MessageView />
                         </AuthRoute>
                         
                         {/* Account Related */}
