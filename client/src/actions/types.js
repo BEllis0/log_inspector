@@ -14,6 +14,7 @@ export const actions = {
     user: {
         FETCH_PROFILE: 'FETCH_PROFILE',
         FETCH_DATA_BY_USER: 'FETCH_DATA_BY_USER',
+        FETCH_MESSAGE: 'FETCH_MESSAGE',
         UPDATE_FIRST_NAME: 'UPDATE_FIRST_NAME',
         UPDATE_LAST_NAME: 'UPDATE_LAST_NAME',
         UPDATE_USERNAME: 'UPDATE_USERNAME',
@@ -21,6 +22,7 @@ export const actions = {
         UPDATE_DOMAIN: 'UPDATE_DOMAIN',
         UPDATE_USER_SETTINGS: 'UPDATE_USER_SETTINGS',
         DELETE_DOMAIN: 'DELETE_DOMAIN',
+        DELETE_MESSAGES: 'DELETE_MESSAGES'
     },
     company: {
         FETCH_DATA_BY_COMPANY: 'FETCH_DATA_BY_COMPANY',
@@ -34,6 +36,13 @@ export const actions = {
         MESSAGE: 'MESSAGE',
         CLOSE_MESSAGE: 'CLOSE_MESSAGE',
     },
+    // handle time between loading data
+    updating: {
+        UPDATING: 'UPDATING',
+        FINISHED_UPDATING: 'FINISHED_UPDATING',
+        UPDATING_MESSAGES: 'UPDATING_MESSAGES',
+        FINISHED_UPDATING_MESSAGES: 'FINISHED_UPDATING_MESSAGES',
+    },
     //error handling
     error: {
         UPDATE_ERROR: 'UPDATE_ERROR',
@@ -42,6 +51,7 @@ export const actions = {
         TOKEN_ERROR: 'TOKEN_ERROR',
         FETCH_MESSAGES_ERROR: 'FETCH_MESSAGES_ERROR',
         USER_UPDATE_ERROR: 'USER_UPDATE_ERROR',
-        LOGOUT_ERROR: 'LOGOUT_ERROR'
+        LOGOUT_ERROR: 'LOGOUT_ERROR',
+        DELETE_MESSAGES_ERROR: 'DELETE_MESSAGES_ERROR'
     }
 }
