@@ -252,6 +252,12 @@ p, li, input, button {
     padding: 30px 0px;
 }
 
+.backgroundView {
+    background-color: $widgetContainer;
+    min-height: 80vh;
+    width: 100vw;
+}
+
 // Margins/padding
 
 .contentMargin {
