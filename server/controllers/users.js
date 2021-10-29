@@ -174,11 +174,8 @@ module.exports = {
                 if (lastName) updates["lastName"] = lastName;
                 if (email) updates["email"] = email;
 
-                console.log('updates: ', updates)
-
                 User.findByIdAndUpdate(user_id, updates, {new: true})
                     .then(response => {
-                        console.log('user settingns updated res', response)
                         res.status(200).json({message: "User settings updated.", data: response });
                     })
                     .catch(err => {
