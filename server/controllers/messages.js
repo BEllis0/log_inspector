@@ -62,5 +62,32 @@ module.exports = {
             },
 
         },
+        patch: {
+
+        },
+        delete: {
+            byIds: (req, res) => {
+                const { user } = req;
+                const { messageIds } = req.body.data || req.body;
+                
+                messageIds
+
+                Message.deleteMany(
+                    {
+                        _id: {
+                          $in: messageIds
+                        }
+                    },
+                    function(err, result) {
+                        if (err) {
+                            console.log('Error deleting messages by ids', err);
+                            res.status(500).json({ message: 'Error deleting messages.' })
+                        } else {
+                          res.status(200).json();
+                        }
+                    }
+                );
+            }
+        },
     },
 };
