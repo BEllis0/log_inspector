@@ -64,9 +64,8 @@ module.exports = {
                 const { user } = req;
                 const { id } = req.params;
 
-                Message.find({ _id: id })
+                Message.findById(id)
                     .then(message => {
-                        console.log(message)
                         res.status(200).json(message);
                     })
                     .catch(err => {
