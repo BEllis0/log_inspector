@@ -60,7 +60,20 @@ module.exports = {
                         res.status(400).json({message: "Error getting messages."});
                     });
             },
+            byId: (req, res) => {
+                const { user } = req;
+                const { id } = req.params;
 
+                Message.find({ _id: id })
+                    .then(message => {
+                        console.log(message)
+                        res.status(200).json(message);
+                    })
+                    .catch(err => {
+                        console.log('Error getting messages from logged in user: ', err);
+                        res.status(400).json({ message: "Error getting message." });
+                    });
+            },
         },
         patch: {
 
