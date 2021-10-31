@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { alpha } from '@mui/material/styles';
@@ -156,9 +157,11 @@ const EnhancedTableToolbar = (props) => {
         
         {numSelected < 2 && 
         <Tooltip title="Edit">
+          <Link to={"/dashboard/messages/" + selectedArr[0]}>
           <IconButton>
             <EditIcon />
           </IconButton>
+          </Link>
         </Tooltip>
         }
 
