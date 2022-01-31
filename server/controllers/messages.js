@@ -7,7 +7,7 @@ module.exports = {
             new: (req, res) => {
                 messageValidation(req.get('apiKey'), req.hostname)
                     .then(validatedPerson => {
-
+                        console.log(req.headers.referer)
                         const convertMessagesToArr = () => {
                             let messageArr = [];
                             for(let message in req.body.message) {
@@ -22,7 +22,7 @@ module.exports = {
                             channel: req.body.channel || null,
                             domain: req.hostname,
                             ownerId: validatedPerson.personId || undefined, // returned from validation process
-                            page: req.protocol + "://" + req.hostname + req.originalUrl || null,
+                            page: req.headers.referer || null,
                             message: convertMessagesToArr() || null,
                             type: req.body.type || null,
                             priorityLevel: req.body.priorityLevel || null,
