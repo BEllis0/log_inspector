@@ -1,0 +1,11 @@
+@import '../../../styles/variables.scss';
+
+#viewBackground {
+    background-color: $widgetContainer;
+    min-height: 80vh;
+    width: 100vw;
+}
+
+.messageContainer >  * {
+    padding: 5px 0px;
+}
