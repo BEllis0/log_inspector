@@ -71,103 +71,105 @@ const ProfileView = (props) => {
         <SecondaryNav navOptions={profileSecondaryNavLinks} />
         
         {/* Page Body */}
-        <div className="container">
+        <div className="backgroundGrey">
+            <div className="container">
 
-        <ProfileTabs />
+            <ProfileTabs />
 
-        {location.pathname === "/account/profile" &&
-            <div className="widgetContainer">
-                <div className="widget fb6">
-                    <div className="widgetInner">
-                        <div className="flex flex-ac flex-justify-sb">
-                            <h3 className="subHeading">Account Details</h3>
-                            <p 
-                                className="strong margin-lr-10" 
-                                onClick={handleSaveEditClick}
+            {location.pathname === "/account/profile" &&
+                <div className="widgetContainer">
+                    <div className="widget fb6">
+                        <div className="widgetInner">
+                            <div className="flex flex-ac flex-justify-sb">
+                                <h3 className="subHeading">Account Details</h3>
+                                <p 
+                                    className="strong margin-lr-10" 
+                                    onClick={handleSaveEditClick}
 
-                            >
-                                {editModeOn ? 'Save': 'Edit'}
-                            </p>
-                        </div>
-                        <br />
-                        <div>
-                            <p className="strong">Name</p>
-                            <p
-                                id="nameEditable"
-                                contentEditable={editModeOn}
-                                suppressContentEditableWarning={true}
-                                onBlur={handleBlur}
                                 >
-                                {user.firstName} {user.lastName}
-                            </p>
+                                    {editModeOn ? 'Save': 'Edit'}
+                                </p>
+                            </div>
+                            <br />
+                            <div>
+                                <p className="strong">Name</p>
+                                <p
+                                    id="nameEditable"
+                                    contentEditable={editModeOn}
+                                    suppressContentEditableWarning={true}
+                                    onBlur={handleBlur}
+                                    >
+                                    {user.firstName} {user.lastName}
+                                </p>
+                            </div>
+                            <br />
+                            <div>
+                                <p className="strong">Email Address</p>
+                                <p
+                                    id="emailEditable"
+                                    // contentEditable={editModeOn}
+                                    suppressContentEditableWarning={true}
+                                    >
+                                    {user.email}
+                                </p>
+                            </div>
+                            <br />
+                            <div>
+                                <p className="strong">Username</p>
+                                <p
+                                    id="usernameEditable"
+                                    contentEditable={editModeOn}
+                                    suppressContentEditableWarning={true}
+                                    onBlur={handleBlur}
+                                    >
+                                    {user.username}
+                                </p>
+                            </div>
                         </div>
-                        <br />
-                        <div>
-                            <p className="strong">Email Address</p>
-                            <p
-                                id="emailEditable"
-                                // contentEditable={editModeOn}
-                                suppressContentEditableWarning={true}
-                                >
-                                {user.email}
+                    </div>
+
+                    <div className="widget fb6">
+                        <div className="widgetInner">
+                            <h3 className="subHeading">Client API Key</h3>
+                            <br />
+                            <p>API Key Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                                molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+                                numquam blanditiis harum
                             </p>
+                            <br />
+                            <div className="flex flex-ac flex-justify-sb orangeBorderBox">
+                                <p id="clientApiKey">{user.clientApiKey}</p>
+                                <p onClick={handleCopyKey}>Copy</p>
+                            </div>
                         </div>
-                        <br />
-                        <div>
-                            <p className="strong">Username</p>
-                            <p
-                                id="usernameEditable"
-                                contentEditable={editModeOn}
-                                suppressContentEditableWarning={true}
-                                onBlur={handleBlur}
-                                >
-                                {user.username}
+                    </div>
+
+                    <div className="widget fb12">
+                        <div className="widgetInner">
+                            <h3 className="subHeading">Domain Whitelist</h3>
+                            <br />
+                            <p>Domain whitelist Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                                molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+                                numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+                                optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+                                obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
+                                nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit.
                             </p>
+                            <br />
+                            
+                            {/* Form for adding new domains */}
+                            <NewDomainForm />
+                            
+                            {/* Domain Whitelist */}
+                            <DomainWhitelist />
                         </div>
                     </div>
                 </div>
+            }
 
-                <div className="widget fb6">
-                    <div className="widgetInner">
-                        <h3 className="subHeading">Client API Key</h3>
-                        <br />
-                        <p>API Key Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-                            molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-                            numquam blanditiis harum
-                        </p>
-                        <br />
-                        <div className="flex flex-ac flex-justify-sb orangeBorderBox">
-                            <p id="clientApiKey">{user.clientApiKey}</p>
-                            <p onClick={handleCopyKey}>Copy</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="widget fb12">
-                    <div className="widgetInner">
-                        <h3 className="subHeading">Domain Whitelist</h3>
-                        <br />
-                        <p>Domain whitelist Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-                            molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-                            numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-                            optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
-                            obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-                            nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit.
-                        </p>
-                        <br />
-                        
-                        {/* Form for adding new domains */}
-                        <NewDomainForm />
-                        
-                        {/* Domain Whitelist */}
-                        <DomainWhitelist />
-                    </div>
-                </div>
+            <SnackbarAlerts />
+            
             </div>
-        }
-
-        <SnackbarAlerts />
-        
         </div>
         
         </>
