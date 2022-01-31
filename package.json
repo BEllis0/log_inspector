@@ -14,7 +14,8 @@
     "build:dev": "webpack --mode development --watch",
     "build": "yarn install",
     "deleteMessages": "node ./server/util/deleteAllMessages.js",
-    "lint": "eslint ./"
+    "lint": "eslint ./",
+    "test": "jest"
   },
   "dependencies": {
     "@emotion/react": "^11.4.1",
