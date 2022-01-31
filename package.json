@@ -32,6 +32,7 @@
     "jest-enzyme": "^7.1.2",
     "jsonwebtoken": "^8.5.1",
     "lodash.throttle": "^4.1.1",
+    "log-inspector": "^1.1.81",
     "mongoose": "5.13.8",
     "nodemailer": "^6.6.3",
     "nodemailer-smtp-transport": "^2.7.4",
