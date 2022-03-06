@@ -19,7 +19,7 @@ coverage
 .grunt
 
 # yarn
-yarn.lock
+# yarn.lock
 
 
 .DS_Store
