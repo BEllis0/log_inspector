@@ -12,7 +12,10 @@
     "start:dev": "nodemon server/server.js -w server -w database/config.js",
     "start": "node server/server.js",
     "build:dev": "webpack --mode development --watch",
+    "heroku-prebuild": "echo This runs before Heroku installs dependencies.",
     "build": "yarn install",
+    "heroku-postbuild": "echo Heroku installed dependencies, but before pruning and caching dependencies.",
+    "heroku-cleanup": "echo Heroku pruning and caches dependencies.",
     "deleteMessages": "node ./server/util/deleteAllMessages.js",
     "lint": "eslint ./",
     "test": "jest"
