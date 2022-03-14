@@ -31,11 +31,11 @@ coverage
 .env.production.local
 
 #bundle
-client/public/bundle.js
-/client/public/bundle.js
-/client/public/bundle.js*
+# client/public/bundle.js
+# /client/public/bundle.js
+# /client/public/bundle.js*
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 build/
 # public/
-public/bundle.js
-**/*bundle.js*
+# public/bundle.js
+# **/bundle.jsx
