@@ -4,8 +4,6 @@ object-assign
 @license MIT
 */
 
-/*! (c) 2020 Andrea Giammarchi */
-
 /** @license MUI v5.0.0
  *
  * This source code is licensed under the MIT license found in the

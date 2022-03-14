@@ -13,7 +13,7 @@
     "start": "node server/server.js",
     "build:dev": "webpack --mode development --watch",
     "heroku-prebuild": "echo This runs before Heroku installs dependencies.",
-    "build": "yarn install",
+    "build": "webpack --mode production",
     "heroku-postbuild": "echo Heroku installed dependencies, but before pruning and caching dependencies.",
     "heroku-cleanup": "echo Heroku pruning and caches dependencies.",
     "deleteMessages": "node ./server/util/deleteAllMessages.js",
@@ -54,7 +54,7 @@
     "uuid-apikey": "^1.5.3",
     "validator": "^13.6.0",
     "webpack": "^5.52.1",
-    "webpack-cli": "^4.8.0"
+    "webpack-cli": "^4.9.2"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
